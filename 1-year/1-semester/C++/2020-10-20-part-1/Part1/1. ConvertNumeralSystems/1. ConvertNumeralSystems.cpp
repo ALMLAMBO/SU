@@ -1,20 +1,107 @@
-// 1. ConvertNumeralSystems.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using namespace std;
+
+//converting from decimal system
+void convert_decimal_to_binary(string input_number_value);
+void convert_decimal_to_octal(string input_number_value);
+void convert_decimal_to_hex(string input_number_value);
+
+int main() {
+	char input_numeral_system, output_numeral_system;
+	string input_number_value;
+
+	cout << "Enter input numeral system: " << endl;
+	cin >> input_numeral_system;
+
+	cout << "Enter input number: " << endl;
+	cin >> input_number_value;
+
+	cout << "Enter output numeral system: " << endl;
+	cin >> output_numeral_system;
+
+	if (input_numeral_system == 'd') {
+		if (output_numeral_system == 'b') {
+			convert_decimal_to_binary(input_number_value);
+		}
+		else if (output_numeral_system == 'h') {
+			convert_decimal_to_hex(input_number_value);
+		}
+		else if (output_numeral_system == 'o') {
+			convert_decimal_to_octal(input_number_value);
+		}
+	}
+
+	return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void convert_decimal_to_binary(string input_number_value) {
+	int converted_number = stoi(input_number_value);
+	int current_bit;
+	string binary_representation;
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+	while (converted_number > 0) {
+		current_bit = converted_number % 2;
+		char bit_to_add = '0' + current_bit;
+
+		binary_representation += bit_to_add;
+		converted_number /= 2;
+	}
+
+	reverse(binary_representation.begin(), binary_representation.end());
+
+	cout << "Binary representation: " << binary_representation << endl;
+}
+
+void convert_decimal_to_hex(string input_number_value) {
+	int converted_number = stoi(input_number_value);
+	int current_bit;
+	string hex_representation;
+
+	while (converted_number > 0) {
+		current_bit = converted_number % 16;
+		
+		switch (current_bit) {
+			case 0: hex_representation += '0'; break;
+			case 1: hex_representation += '1'; break;
+			case 2: hex_representation += '2'; break;
+			case 3: hex_representation += '3'; break;
+			case 4: hex_representation += '4'; break;
+			case 5: hex_representation += '5'; break;
+			case 6: hex_representation += '6'; break;
+			case 7: hex_representation += '7'; break;
+			case 8: hex_representation += '8'; break;
+			case 9: hex_representation += '9'; break;
+			case 10: hex_representation += 'A'; break;
+			case 11: hex_representation += 'B'; break;
+			case 12: hex_representation += 'C'; break;
+			case 13: hex_representation += 'D'; break;
+			case 14: hex_representation += 'E'; break;
+			case 15: hex_representation += 'F'; break;
+		}
+
+		converted_number /= 16;
+	}
+
+	reverse(hex_representation.begin(), hex_representation.end());
+
+	cout << "Hex representation: " << hex_representation << endl;
+}
+
+void convert_decimal_to_octal(string input_number_value) {
+	int converted_number = stoi(input_number_value);
+	int current_bit;
+	string octal_representation;
+
+	while(converted_number > 0) {
+		current_bit = converted_number % 8;
+		octal_representation += '0' + current_bit;
+
+		converted_number /= 8;
+	}
+
+	reverse(octal_representation.begin(), octal_representation.end());
+
+	cout << "Octal representation: " << octal_representation << endl;
+}
