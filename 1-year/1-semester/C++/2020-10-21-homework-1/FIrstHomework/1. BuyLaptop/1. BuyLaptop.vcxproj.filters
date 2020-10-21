@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="1. BuyLaptop.cpp">
+    <ClCompile Include="fn_62622_d1_1_vc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
