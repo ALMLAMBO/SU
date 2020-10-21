@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2. SecondLargestNumber.cpp">
+    <ClCompile Include="fn_62622_2_vc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
