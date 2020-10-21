@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1. BuyLaptop", "1. BuyLapto
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2. SecondLargestNumber", "2. SecondLargestNumber\2. SecondLargestNumber.vcxproj", "{CFA1A419-9B0F-419C-8E75-B0B0905F5162}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3. PalindromeFromThreeNumbers", "3. PalindromeFromThreeNumbers\3. PalindromeFromThreeNumbers.vcxproj", "{8DA636E0-7931-42EE-9F9B-D7D15F62FA35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{CFA1A419-9B0F-419C-8E75-B0B0905F5162}.Release|x64.Build.0 = Release|x64
 		{CFA1A419-9B0F-419C-8E75-B0B0905F5162}.Release|x86.ActiveCfg = Release|Win32
 		{CFA1A419-9B0F-419C-8E75-B0B0905F5162}.Release|x86.Build.0 = Release|Win32
+		{8DA636E0-7931-42EE-9F9B-D7D15F62FA35}.Debug|x64.ActiveCfg = Debug|x64
+		{8DA636E0-7931-42EE-9F9B-D7D15F62FA35}.Debug|x64.Build.0 = Debug|x64
+		{8DA636E0-7931-42EE-9F9B-D7D15F62FA35}.Debug|x86.ActiveCfg = Debug|Win32
+		{8DA636E0-7931-42EE-9F9B-D7D15F62FA35}.Debug|x86.Build.0 = Debug|Win32
+		{8DA636E0-7931-42EE-9F9B-D7D15F62FA35}.Release|x64.ActiveCfg = Release|x64
+		{8DA636E0-7931-42EE-9F9B-D7D15F62FA35}.Release|x64.Build.0 = Release|x64
+		{8DA636E0-7931-42EE-9F9B-D7D15F62FA35}.Release|x86.ActiveCfg = Release|Win32
+		{8DA636E0-7931-42EE-9F9B-D7D15F62FA35}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
