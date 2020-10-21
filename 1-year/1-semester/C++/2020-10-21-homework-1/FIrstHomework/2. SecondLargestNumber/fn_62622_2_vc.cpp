@@ -17,5 +17,26 @@
 using namespace std;
 
 int main() {
+	int input_number, largest_number = INT_MIN, 
+		second_largest_number = INT_MIN;
+
+	while (true) {
+		cin >> input_number;
+
+		if (input_number > largest_number) {
+			largest_number = input_number;
+		}
+		else if (input_number > second_largest_number && 
+			input_number < largest_number) {
+
+			second_largest_number = largest_number;
+		}
+		else if (input_number <= 0) {
+			break;
+		}
+	}
+
+	cout << endl << second_largest_number << endl;
+
 	return 0;
 }
