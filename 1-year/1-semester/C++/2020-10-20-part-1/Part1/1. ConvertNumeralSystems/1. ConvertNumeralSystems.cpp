@@ -8,6 +8,11 @@ void convert_decimal_to_binary(string input_number_value);
 void convert_decimal_to_octal(string input_number_value);
 void convert_decimal_to_hex(string input_number_value);
 
+//converting from hexadecimal system
+void convert_hex_to_decimal(string input_number_value);
+void convert_hex_to_binary(string input_number_value);
+void convert_hex_to_octal(string input_number_value);
+
 int main() {
 	char input_numeral_system, output_numeral_system;
 	string input_number_value;
@@ -31,6 +36,26 @@ int main() {
 		else if (output_numeral_system == 'o') {
 			convert_decimal_to_octal(input_number_value);
 		}
+		else {
+			cout << "Invalid output numeral system" << endl;
+		}
+	}
+	else if (input_numeral_system == 'h') {
+		if (output_numeral_system == 'd') {
+			convert_hex_to_decimal(input_number_value);
+		}
+		else if (output_numeral_system == 'b') {
+			convert_hex_to_binary(input_number_value);
+		}
+		else if (output_numeral_system == 'o') {
+			convert_hex_to_octal(input_number_value);
+		}
+		else {
+			cout << "Invalid output numeral system" << endl;
+		}
+	}
+	else {
+		cout << "Invalid input numeral system" << endl;
 	}
 
 	return 0;
@@ -183,4 +208,75 @@ void convert_decimal_to_octal(string input_number_value) {
 	}
 
 	cout << "Octal representation: " << octal_representation << endl;
+}
+
+void convert_hex_to_decimal(string input_number_value) {
+	reverse(input_number_value.begin(), input_number_value.end());
+	
+	if (input_number_value == "0") {
+		cout << "Decimal representation: 0" << endl;
+
+		return;
+	}
+	else if (input_number_value.find('-') != string::npos) {
+		int decimal_number = 0;
+
+		string positive_hex = input_number_value
+			.substr(0, input_number_value.find('-'));
+
+		for (int i = 0; i < positive_hex.size(); i++) {
+			switch (positive_hex.at(i)) {
+				case '0': break;
+				case '1': decimal_number += pow(16, i); break;
+				case '2': decimal_number += 2 * pow(16, i); break;
+				case '3': decimal_number += 3 * pow(16, i); break;
+				case '4': decimal_number += 4 * pow(16, i); break;
+				case '5': decimal_number += 5 * pow(16, i); break;
+				case '6': decimal_number += 6 * pow(16, i); break;
+				case '7': decimal_number += 7 * pow(16, i); break;
+				case '8': decimal_number += 8 * pow(16, i); break;
+				case 'A': decimal_number += 10 * pow(16, i); break;
+				case 'B': decimal_number += 11 * pow(16, i); break;
+				case 'C': decimal_number += 12 * pow(16, i); break;
+				case 'D': decimal_number += 13 * pow(16, i); break;
+				case 'E': decimal_number += 14 * pow(16, i); break;
+				case 'F': decimal_number += 15 * pow(16, i); break;
+			}
+		}
+
+		cout << "Decimal representation: " << -decimal_number << endl;
+	}
+	else {
+		int decimal_number = 0;
+
+		for (int i = 0; i < input_number_value.size(); i++) {
+			switch (input_number_value.at(i)) {
+				case '0': break;
+				case '1': decimal_number += pow(16, i); break;
+				case '2': decimal_number += 2 * pow(16, i); break;
+				case '3': decimal_number += 3 * pow(16, i); break;
+				case '4': decimal_number += 4 * pow(16, i); break;
+				case '5': decimal_number += 5 * pow(16, i); break;
+				case '6': decimal_number += 6 * pow(16, i); break;
+				case '7': decimal_number += 7 * pow(16, i); break;
+				case '8': decimal_number += 8 * pow(16, i); break;
+				case 'A': decimal_number += 10 * pow(16, i); break;
+				case 'B': decimal_number += 11 * pow(16, i); break;
+				case 'C': decimal_number += 12 * pow(16, i); break;
+				case 'D': decimal_number += 13 * pow(16, i); break;
+				case 'E': decimal_number += 14 * pow(16, i); break;
+				case 'F': decimal_number += 15 * pow(16, i); break;
+			}
+		}
+
+		cout << "Decimal representation: " << decimal_number << endl;
+	}
+}
+
+void convert_hex_to_binary(string input_number_value) {
+
+}
+
+void convert_hex_to_octal(string input_number_value) {
+
 }
