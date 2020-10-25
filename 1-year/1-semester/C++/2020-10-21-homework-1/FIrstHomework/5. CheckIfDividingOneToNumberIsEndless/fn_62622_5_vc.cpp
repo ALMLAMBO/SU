@@ -13,7 +13,6 @@
 */
 
 #include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -94,37 +93,27 @@ int main() {
 }
 
 int count_zeros(int number) {
-	string number_as_string = to_string(number);
+	int zeros_count = 0;
 
-	if (number_as_string.length() == 2 && number % 10 == 0) {
-		return 1;
+	while (number % 10 == 0) {
+		zeros_count++;
+		number /= 10;
 	}
 
-	int last_index_of_non_zero_number = number_as_string
-		.find_last_not_of('0');
-
-	return number_as_string
-		.substr(last_index_of_non_zero_number + 1)
-		.length();
+	return zeros_count;
 }
 
 int count_decimal_signs(double number) {
-	string number_as_string = to_string(number);
+	int decimal_signs_count = 0;
+	double whole_part;
 
-	int index_of_decimal_sign = number_as_string
-		.find('.');
+	//https://www.geeksforgeeks.org/modf-in-cc/
+	while (modf(number, &whole_part) != 0) {
+		decimal_signs_count++;
+		number *= 10;
+	}
 
-	int index_of_last_non_zero_number = number_as_string
-		.find_last_not_of('0');
-
-	string str = number_as_string
-		.substr(index_of_decimal_sign + 1, index_of_last_non_zero_number - 1);
-
-	//return number_as_string
-	//	.substr(index_of_decimal_sign + 1, index_of_last_non_zero_number)
-	//	.length();
-
-	return str.length();
+	return decimal_signs_count;
 }
 
 bool denominator_is_power_of_ten(int denominator) {
