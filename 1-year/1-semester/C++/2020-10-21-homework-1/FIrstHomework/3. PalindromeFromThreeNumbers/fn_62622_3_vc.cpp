@@ -16,89 +16,56 @@
 
 using namespace std;
 
-string generate_smallest_palindrome(char smallest_number_as_char,
-	char medium_number_as_char, char largest_number_as_char);
+void print_smallest_palindrome(int smallest_number,
+	int medium_number, int largest_number);
 
 int main() {
 	int first_number, second_number, third_number;
 	cin >> first_number >> second_number >> third_number;
 
-	string smallest_number_palindrome;
-
-	char first_number_as_char = '0' + first_number;
-	char second_number_as_char = '0' + second_number;
-	char third_number_as_char = '0' + third_number;
-
 	if (first_number <= second_number && 
 		first_number <= third_number) {
 
 		if (second_number < third_number) {
-			smallest_number_palindrome = 
-				generate_smallest_palindrome(
-					first_number_as_char, second_number_as_char, 
-					third_number_as_char
-				);
+			print_smallest_palindrome(first_number, 
+				second_number, third_number);
 		}
 		else {
-			smallest_number_palindrome =
-				generate_smallest_palindrome(
-					first_number_as_char, third_number_as_char,
-					second_number_as_char
-				);
+			print_smallest_palindrome(first_number,
+				third_number, second_number);
 		}
 	}
-	else if (second_number <= first_number &&
+	else if (second_number <= first_number && 
 		second_number <= third_number) {
 
 		if (first_number < third_number) {
-			smallest_number_palindrome =
-				generate_smallest_palindrome(
-					second_number_as_char, first_number_as_char,
-					third_number_as_char
-				);
+			print_smallest_palindrome(second_number,
+				first_number, third_number);
 		}
 		else {
-			smallest_number_palindrome =
-				generate_smallest_palindrome(
-					second_number_as_char, third_number_as_char,
-					first_number_as_char
-				);
+			print_smallest_palindrome(second_number,
+				third_number, first_number);
 		}
 	}
 	else {
 		if (first_number < second_number) {
-			smallest_number_palindrome =
-				generate_smallest_palindrome(
-					third_number_as_char, first_number_as_char,
-					second_number_as_char
-				);
+			print_smallest_palindrome(third_number,
+				first_number, second_number);
 		}
 		else {
-			smallest_number_palindrome =
-				generate_smallest_palindrome(
-					third_number_as_char, second_number_as_char,
-					first_number_as_char
-				);
+			print_smallest_palindrome(third_number,
+				second_number, first_number);
 		}
 	}
-
-	cout << endl << smallest_number_palindrome << endl;
 
 	return 0;
 }
 
-string generate_smallest_palindrome(
-	char smallest_number_as_char,
-	char medium_number_as_char,
-	char largest_number_as_char) {
+void print_smallest_palindrome(int smallest_number,
+	int medium_number, int largest_number) {
 
-	string smallest_number_palindrome;
-
-	smallest_number_palindrome += smallest_number_as_char;
-	smallest_number_palindrome += medium_number_as_char;
-	smallest_number_palindrome += largest_number_as_char;
-	smallest_number_palindrome += medium_number_as_char;
-	smallest_number_palindrome += smallest_number_as_char;
-
-	return smallest_number_palindrome;
+	cout << endl
+		<< smallest_number << medium_number
+		<< largest_number
+		<< medium_number << smallest_number << endl;
 }
