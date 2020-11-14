@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="3. NumberOfPalindromes.cpp">
+    <ClCompile Include="fn_62622_d2_3_vc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
