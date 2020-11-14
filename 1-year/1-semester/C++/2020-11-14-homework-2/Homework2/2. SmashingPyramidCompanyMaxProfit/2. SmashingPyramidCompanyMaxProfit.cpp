@@ -7,7 +7,7 @@
 *
 * @author Aleksander Marinov
 * @idnumber 62622
-* @task 1
+* @task 2
 * @compiler VC
 *
 */
