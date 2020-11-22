@@ -100,10 +100,10 @@ unique_numbers.push_back(number);
 }
 
 /// <summary>
-/// 
+/// gets only negative numbers from all unique numbers
 /// </summary>
-/// <param name="unique_numbers"></param>
-/// <returns></returns>
+/// <param name="unique_numbers">unique numbers to filter</param>
+/// <returns>int vector with only negative numbers</returns>
 vector<int> get_negative_numbers(vector<int>& unique_numbers) {
 	vector<int> negative_numbers;
 
@@ -118,6 +118,11 @@ vector<int> get_negative_numbers(vector<int>& unique_numbers) {
 	return negative_numbers;
 }
 
+/// <summary>
+/// gets only non negative numbers from all unique numbers
+/// </summary>
+/// <param name="unique_numbers">unique numbers to filter</param>
+/// <returns>int vector with only non negative numbers</returns>
 vector<int> get_non_negative_numbers(vector<int>& unique_numbers) {
 	const int UNIQUE_NUMBERS_COUNT = unique_numbers.size();
 	vector<int> non_negative_numbers;
@@ -133,6 +138,13 @@ vector<int> get_non_negative_numbers(vector<int>& unique_numbers) {
 	return non_negative_numbers;
 }
 
+/// <summary>
+/// checks if non negative numbers are only zero
+/// </summary>
+/// <param name="non_negative_numbers">numbers to check</param>
+/// <returns>true if there are only zeros or false 
+/// if there is one or more greater than zero elements
+/// </returns>
 bool non_negative_numbers_only_zeros(
 	vector<int>& non_negative_numbers) {
 
@@ -150,6 +162,14 @@ bool non_negative_numbers_only_zeros(
 	return true;
 }
 
+/// <summary>
+/// find three numbers whose sum is zero via checking if 
+/// opposite negative number is in non negative numbers and 
+/// there is a zero in non negative numbers
+/// </summary>
+/// <param name="negative_numbers">all unique negative numbers</param>
+/// <param name="non_negative_numbers">all unique non negative numbers</param>
+/// <returns>these three numbers whose sum is zero count</returns>
 int find_sum_zero_opposite_elements(
 	vector<int>& negative_numbers,
 	vector<int>& non_negative_numbers) {
@@ -234,6 +254,12 @@ int find_sum_zero_sum_of_two_opposite(
 	return three_numbers_sum_zero_count;
 }
 
+/// <summary>
+/// finds and prints how many are these three numbers
+/// whose sum is zero
+/// </summary>
+/// <param name="unique_negative_numbers">all unique negative numbers</param>
+/// <param name="unique_non_negative_numbers">all unique non negative numbers</param>
 void find_three_numbers_sum_zero(
 	vector<int>& unique_negative_numbers,
 	vector<int>& unique_non_negative_numbers) {
