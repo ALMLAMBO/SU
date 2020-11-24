@@ -21,14 +21,22 @@ using namespace std;
 void process_numbers(int cycle_iterations, vector<int>& numbers);
 
 int main() {
+	const int minimum_numbers_count = 3;
+	const int maximum_numbers_count = 100;
 	int numbers_count;
 
 	cin >> numbers_count;
 
-	if(!(numbers_count >= 3 && numbers_count <= 100)) {
-		cout << "Invalid input data" << endl;
+	if(numbers_count < minimum_numbers_count 
+		|| numbers_count > maximum_numbers_count) {
+
+		cout << "Invalid numbers count" << endl;
 		
-		return -1;
+		while (numbers_count < minimum_numbers_count
+			|| numbers_count > maximum_numbers_count) {
+			
+			cin >> numbers_count;
+		}
 	}
 
 	vector<int> numbers;
@@ -43,14 +51,19 @@ int main() {
 	int cycle_iterations = numbers_count / 2;
 
 	if (numbers_count % 2 != 0) {
-		cycle_iterations += 1;
+		cycle_iterations++;
 	}
 
 	process_numbers(cycle_iterations, numbers);
 
 	return 0;
 }
-
+/// <summary>
+/// checks if the difference between first and second 
+/// equals last two and so on
+/// </summary>
+/// <param name="cycle_iterations">how many iterations will be done</param>
+/// <param name="numbers">all numbers to check</param>
 void process_numbers(int cycle_iterations, vector<int>& numbers) {
 	bool is_triangle = true;
 	
