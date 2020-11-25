@@ -21,13 +21,21 @@ bool is_palindrome(vector<int>& numbers_to_check);
 void process_numbers(vector<int>& numbers);
 
 int main() {
+	const int minimum_numbers_count = 3;
+	const int maximum_numbers_count = 1000;
 	int numbers_count;
 	cin >> numbers_count;
 
-	if (!(numbers_count >= 3 && numbers_count <= 1000)) {
+	if (numbers_count < minimum_numbers_count 
+		|| numbers_count > maximum_numbers_count) {
+
 		cout << "Invalid data" << endl;
-		
-		return -1;
+
+		while (numbers_count < minimum_numbers_count
+			|| numbers_count > maximum_numbers_count) {
+			
+			cin >> numbers_count;
+		}
 	}
 
 	vector<int> numbers;
