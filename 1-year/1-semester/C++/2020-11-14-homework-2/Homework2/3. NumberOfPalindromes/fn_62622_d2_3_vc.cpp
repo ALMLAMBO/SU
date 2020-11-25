@@ -44,6 +44,11 @@ int main() {
 	return 0;
 }
 
+/// <summary>
+/// checks if number sequence is palindrome
+/// </summary>
+/// <param name="numbers_to_check">vector with numbers</param>
+/// <returns>true if it is or false if it is not</returns>
 bool is_palindrome(vector<int>& numbers_to_check) {
 	int numbers_to_check_count = numbers_to_check.size();
 
@@ -60,6 +65,10 @@ bool is_palindrome(vector<int>& numbers_to_check) {
 	return true;
 }
 
+/// <summary>
+/// finds all palindromes in given number sequence
+/// </summary>
+/// <param name="numbers">numbers to find palindromes</param>
 void process_numbers(vector<int>& numbers) {
 	int palindromes_count = 0;
 	int min_palindrome_len = 3;
