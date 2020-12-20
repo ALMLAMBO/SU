@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="3. MagicSquare.cpp">
+    <ClCompile Include="fn62622_d3_3_vc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
