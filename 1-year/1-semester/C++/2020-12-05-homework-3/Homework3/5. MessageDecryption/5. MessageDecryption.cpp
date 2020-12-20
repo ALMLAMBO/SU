@@ -5,6 +5,7 @@
 using namespace std;
 
 int find_message_length(const char* filename);
+int string_length(char* string);
 char* decrypt_message(const char* filename);
 void print_message(char* message);
 char get_smallest_letter_ascii(char* line);
@@ -43,6 +44,13 @@ int find_message_length(const char* filename) {
 	return lines_count + 1;
 }
 
+int string_length(char* string) {
+	int count = 0;
+	while (string[count++] != '\0');
+
+	return count - 1;
+}
+
 char* decrypt_message(const char* filename) {
 	int lines_count = find_message_length(filename);
 	char* message = (char*)malloc((lines_count + 1) * sizeof(char));
@@ -78,7 +86,7 @@ char* decrypt_message(const char* filename) {
 }
 
 void print_message(char* message) {
-	int length = strlen(message);
+	int length = string_length(message);
 	
 	for (int i = 0; i < length; i++) {
 		if (message[i] != ' ') {
@@ -90,7 +98,7 @@ void print_message(char* message) {
 }
 
 char get_smallest_letter_ascii(char* line) {
-	int line_length = strlen(line);
+	int line_length = string_length(line);
 	
 	char* last_element = (line + line_length);
 	char smallest_letter_ascii = *min_element(
@@ -144,8 +152,8 @@ char get_smallest_letter_ascii(char* line) {
 }
 
 bool contains_all_small_and_big_letters(char* line) {
-	//TODO: implement my strlen
-	int length = strlen(line);
+	//TODO: implement my string_length
+	int length = string_length(line);
 	char small_letter = 'a';
 	char big_letter = 'A';
 	char* last_element = line + length - 1;
