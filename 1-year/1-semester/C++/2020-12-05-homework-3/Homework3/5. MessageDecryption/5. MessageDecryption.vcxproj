@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="5. MessageDecryption.cpp" />
+    <ClCompile Include="fn62622_d3_5_vc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="message.txt" />
