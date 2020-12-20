@@ -1,20 +1,98 @@
-// 1. StringEachElementContainsEqualTImes.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <algorithm>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using namespace std;
+bool each_elem_contains_equal(char* string);
+bool all_elements_equal(int* arr, int length);
+int get_unique_symbols_count(char* string);
+int string_length(char* string);
+
+int main() {
+	char string[150];
+	cin >> string;
+
+	bool contains_equal = each_elem_contains_equal(string);
+	cout << noboolalpha << contains_equal << endl;
+
+	return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+bool each_elem_contains_equal(char* string) {
+	int length = string_length(string);
+	char* last_element = string + length;
+	sort(string, last_element);
+	
+	int unique_symbols = get_unique_symbols_count(string);
+	int* symbols_count = new int[unique_symbols];
+	int symbols_count_length = 0;
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+	int count = 1;
+	for (int i = 0; i < length - 1; i++) {
+		if (string[i] == string[i + 1]) {
+			count++;
+		}
+		else {
+			symbols_count[symbols_count_length++] = count;
+			count = 1;
+		}
+	}
+
+	sort(symbols_count, symbols_count + symbols_count_length);
+	bool all_equal = all_elements_equal(
+		symbols_count, symbols_count_length);
+
+	bool equal = false;
+	if (!all_equal) {
+		for (int i = 0; i < symbols_count_length; i++) {
+			int count = symbols_count[i];
+			count--;
+
+			symbols_count[i] = count;
+			if (all_elements_equal(symbols_count, symbols_count_length)) {
+				equal = true;
+				break;
+			}
+		}
+	}
+	else {
+		equal = true;
+	}
+
+	return equal;
+}
+
+bool all_elements_equal(int* arr, int length) {
+	int* last_element = arr + length;
+	sort(arr, last_element);
+
+	for (int i = 0; i < length - 1; i++) {
+		if (arr[i] != arr[i + 1]) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+int get_unique_symbols_count(char* string) {
+	int length = string_length(string);
+
+	char* last_element = string + length;
+	sort(string, last_element);
+
+	int unique_symbols = 0;
+	for (int i = 0; i < length - 1; i++) {
+		if (string[i] != string[i + 1]) {
+			unique_symbols++;
+		}
+	}
+
+	return unique_symbols;
+}
+
+int string_length(char* string) {
+	int count = 0;
+	while (string[count++] != '\0');
+
+	return count - 1;
+}
