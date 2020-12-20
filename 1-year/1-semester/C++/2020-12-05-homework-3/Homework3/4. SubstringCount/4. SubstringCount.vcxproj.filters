@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="4. SubstringCount.cpp">
+    <ClCompile Include="fn62622_d3_4_vc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
