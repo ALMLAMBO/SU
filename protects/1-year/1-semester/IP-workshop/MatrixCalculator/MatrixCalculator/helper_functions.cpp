@@ -9,7 +9,37 @@ using namespace std;
 /// <param name="number">Input number</param>
 /// <returns>square root</returns>
 double calclulate_sqrt(double number) {
-	
+	double sqrt_number = 0;
+
+	if (number < 0) {
+		cout << "Invalid number" << endl;
+		sqrt_number = number;
+	}
+	else if (number == 0) {
+		sqrt_number = 0;
+	}
+	else if (number == 1) {
+		sqrt_number = 1;
+	}
+	else {
+		//https://stackoverflow.com/questions/33299667/program-to-calculate-square-root-c
+		//First answer second algorithm
+		int left = 1;
+		int right = number / 2 + 1;
+
+		while (left <= right) {
+			int mid = left + ((right - left) / 2);
+			if (mid <= number / mid) {
+				left = mid + 1;
+				sqrt_number = mid;
+			}
+			else {
+				right = mid - 1;
+			}
+		}
+	}
+
+	return sqrt_number;
 }
 
 /// <summary>
@@ -38,7 +68,7 @@ double absolute_value(double number) {
 /// <param name="sizes">dimensions of the matrix</param>
 /// <returns>matrix with values</returns>
 double** get_matrix_values(ifstream& file,
-	 matrix_dimensions sizes) {
+	struct matrix_dimensions sizes) {
 
 
 }
@@ -56,7 +86,7 @@ int find_number_length(double number) {
 /// Gets matrix dimensions
 /// </summary>
 /// <param name="file">reference input file stream</param>
-/// </returns>struct with matrix sizes<returns>
+/// <returns>struct with matrix sizes</returns>
 struct matrix_dimensions get_matrix_dimensions(
 	ifstream& file) {
 
