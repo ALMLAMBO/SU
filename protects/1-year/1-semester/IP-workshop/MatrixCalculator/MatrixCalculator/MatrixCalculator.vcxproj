@@ -141,6 +141,14 @@
   <ItemGroup>
     <ClCompile Include="MatrixCalculator.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="helper_functions.h" />
+    <ClInclude Include="matrix_operations.h" />
+    <ClInclude Include="print_functions.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="matrix_mult_number.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
