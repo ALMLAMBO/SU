@@ -2,11 +2,15 @@
 #define __HELPER_FUNCTIONS__
 
 #include <fstream>
+#include "matrix_operations.h"
 using namespace std;
 
 double calclulate_sqrt(double number);
 double pow_number(double number, int exponent);
 double absolute_value(double number);
+double** get_matrix_values(ifstream& file,
+	struct matrix_dimensions sizes);
+
 int find_number_length(double number);
 
 struct matrix_dimensions get_matrix_dimensions(
