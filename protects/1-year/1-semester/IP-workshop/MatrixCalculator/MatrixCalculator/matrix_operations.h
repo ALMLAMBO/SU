@@ -20,10 +20,10 @@ struct matrix_elements_length {
 //Required
 void matrix_multiplication_with_number();
 void matrices_multiplication();
-void calculate_matrix_determinant();
+int calculate_matrix_determinant();
 void matrix_division_with_number();
-void find_matrix_inverse();
-void matrix_transposition();
+struct matrix_representation find_matrix_inverse();
+struct matrix_representation matrix_transposition();
 void singular_value_decomposition();
 
 //Optional
