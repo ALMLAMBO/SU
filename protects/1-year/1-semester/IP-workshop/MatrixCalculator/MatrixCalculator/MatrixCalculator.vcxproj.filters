@@ -16,10 +16,19 @@
     <Filter Include="Source Files\files">
       <UniqueIdentifier>{5e597f1f-c5f2-4970-8a24-7adc5e52d9a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\implementations">
+      <UniqueIdentifier>{e1f0f836-fd75-4dcc-9665-fd1b7813e2f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MatrixCalculator.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="matrix_operations.cpp">
+      <Filter>Source Files\implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="helper_functions.cpp">
+      <Filter>Source Files\implementations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
