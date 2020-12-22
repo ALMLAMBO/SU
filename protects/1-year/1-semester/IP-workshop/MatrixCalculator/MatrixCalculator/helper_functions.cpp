@@ -1,8 +1,6 @@
 #include <iostream>
 #include "helper_functions.h"
 
-using namespace std;
-
 /// <summary>
 /// Calculates square root of number
 /// </summary>
@@ -49,7 +47,23 @@ double calclulate_sqrt(double number) {
 /// <param name="exponent">input exponent</param>
 /// <returns>result after power</returns>
 double pow_number(double number, int exponent) {
+	double powered_number = 1;
+	
+	if (exponent == 0) {
+		powered_number = 1;
+	}
+	else if (exponent > 0) {
+		for (int i = 0; i < exponent; i++) {
+			powered_number *= number;
+		}
+	}
+	else if (exponent < 0) {
+		for (int i = exponent; i < 0; i++) {
+			powered_number *= 1 / number;
+		}
+	}
 
+	return powered_number;
 }
 
 /// <summary>
