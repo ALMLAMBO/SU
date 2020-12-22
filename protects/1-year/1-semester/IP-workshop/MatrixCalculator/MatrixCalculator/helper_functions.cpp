@@ -99,7 +99,22 @@ double** get_matrix_values(ifstream& file,
 /// <param name="number">input number</param>
 /// <returns>how long it is</returns>
 int find_number_length(double number) {
+	int length = 0;
 
+	while (number > 0) {
+		length++;
+		number /= 10;
+	}
+
+	int whole_part = (int)number;
+	double decimal_part = number - whole_part;
+
+	while (decimal_part != 0) {
+		length++;
+		decimal_part = (number - whole_part) * 10;
+	}
+
+	return length;
 }
 
 /// <summary>
