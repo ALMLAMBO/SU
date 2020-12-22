@@ -72,7 +72,13 @@ double pow_number(double number, int exponent) {
 /// <param name="number">input number</param>
 /// <returns>absolute value</returns>
 double absolute_value(double number) {
-
+	double result = 0;
+	
+	if (number < 0) {
+		result = -number;
+	}
+	
+	return result;
 }
 
 /// <summary>
