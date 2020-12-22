@@ -136,14 +136,29 @@ struct matrix_dimensions get_matrix_dimensions(
 struct matrix_elements_length get_matrix_elements_length(
 	struct matrix_representation matrix) {
 
+	struct matrix_elements_length elements_length;
+	const int MATRIX_ELEMENTS_COUNT = matrix.rows * matrix.columns;
+	const int ROWS = matrix.rows;
+	const int COLUMNS = matrix.columns;
 
+	elements_length.elements_length_count = MATRIX_ELEMENTS_COUNT;
+	elements_length.elements_length = new int[MATRIX_ELEMENTS_COUNT];
+
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLUMNS; j++) {
+			elements_length.elements_length[i + j] =
+				find_number_length(matrix.values[i][j]);
+		}
+	}
+
+	return elements_length;
 }
 
 /// <summary>
 /// Gets longest number
 /// </summary>
 /// <param name="elements">matrix elements length</param>
-/// <returns></returns>
+/// <returns>longest number length</returns>
 int get_longest_number_length(
 	struct matrix_elements_length elements) {
 
