@@ -30,6 +30,9 @@
     <ClCompile Include="helper_functions.cpp">
       <Filter>Source Files\implementations</Filter>
     </ClCompile>
+    <ClCompile Include="print_functions.cpp">
+      <Filter>Source Files\implementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="print_functions.h">

@@ -142,6 +142,7 @@
     <ClCompile Include="helper_functions.cpp" />
     <ClCompile Include="MatrixCalculator.cpp" />
     <ClCompile Include="matrix_operations.cpp" />
+    <ClCompile Include="print_functions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper_functions.h" />
