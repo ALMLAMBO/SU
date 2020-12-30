@@ -3,21 +3,22 @@
 # TODO
 
 ## Required
-### Matrix multiplication with number
+
 ### Matrices multiplication
 ### Find determinant of matrix up to 4x4
 ### Matrix division with number
 ### Find inverse matrix
-### Matrix transpose
 ### SVD
 
 ## Optional
-### Sum and substraction of matrices
+### Sum and subtraction of matrices
 ### Matrices division
 
 
 # Done
 
 ## Required
+### Matrix multiplication with number
+### Matrix transpose
 
 ## Optional
