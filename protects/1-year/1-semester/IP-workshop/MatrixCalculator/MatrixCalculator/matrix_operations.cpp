@@ -103,9 +103,42 @@ struct matrix_representation * find_matrix_inverse() {
 /// <summary>
 /// Transpose a matrix
 /// </summary>
-/// </returns> transposed matrix
+/// <returns> transposed matrix </returns>
 struct matrix_representation * matrix_transposition() {
+	const char* filename = "matrix-transpose.txt";
+	ifstream matrix_transpose;
+	matrix_transpose.open(filename);
+	struct matrix_representation* transpose = NULL;
 
+	if (matrix_transpose.is_open()) {
+		struct matrix_dimensions* sizes =
+			get_matrix_dimensions(matrix_transpose);
+
+		struct matrix_representation* matrix =
+			new struct matrix_representation[1];
+
+		matrix -> dimensions = sizes;
+		matrix -> values = get_matrix_values(
+			matrix_transpose, sizes);
+
+		transpose = new struct matrix_representation[1];
+		transpose -> dimensions -> rows = 
+			matrix -> dimensions -> columns;
+	
+		transpose -> dimensions -> columns =
+			matrix -> dimensions -> rows;
+
+		const int ROWS = transpose -> dimensions -> rows;
+		const int COLUMNS = transpose -> dimensions -> columns;
+
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLUMNS; j++) {
+				transpose -> values[i][j] = matrix -> values[j][i];
+			}
+		}
+	}
+
+	return transpose;
 }
 
 void singular_value_decomposition() {
