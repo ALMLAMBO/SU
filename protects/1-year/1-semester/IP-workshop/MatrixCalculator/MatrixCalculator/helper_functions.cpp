@@ -1,5 +1,9 @@
 #include <iostream>
 #include "helper_functions.h"
+#include "matrix_operations.h"
+#include <cassert>
+
+using namespace std;
 
 /// <summary>
 /// Calculates square root of number
@@ -88,7 +92,7 @@ double absolute_value(double number) {
 /// <param name="sizes">dimensions of the matrix</param>
 /// <returns>matrix with values</returns>
 double** get_matrix_values(ifstream& file,
-	struct matrix_dimensions sizes) {
+	struct matrix_dimensions * sizes) {
 
 
 }
@@ -122,7 +126,7 @@ int find_number_length(double number) {
 /// </summary>
 /// <param name="file">reference input file stream</param>
 /// <returns>struct with matrix sizes</returns>
-struct matrix_dimensions get_matrix_dimensions(
+struct matrix_dimensions * get_matrix_dimensions(
 	ifstream& file) {
 
 
@@ -133,22 +137,33 @@ struct matrix_dimensions get_matrix_dimensions(
 /// </summary>
 /// <param name="matrix">struct with matrix values and dimensions</param>
 /// </returns>struct with matrix elements length<returns>
-struct matrix_elements_length get_matrix_elements_length(
-	struct matrix_representation matrix) {
+struct matrix_elements_length * get_matrix_elements_length(
+	struct matrix_representation * matrix) {
 
-	struct matrix_elements_length elements_length;
-	const int MATRIX_ELEMENTS_COUNT = matrix.rows * matrix.columns;
-	const int ROWS = matrix.rows;
-	const int COLUMNS = matrix.columns;
+	struct matrix_elements_length * elements_length = 
+		new struct matrix_elements_length[1];
 
-	elements_length.elements_length_count = MATRIX_ELEMENTS_COUNT;
-	elements_length.elements_length = new int[MATRIX_ELEMENTS_COUNT];
+	const int MATRIX_ELEMENTS_COUNT = matrix -> dimensions -> rows * 
+		matrix -> dimensions -> columns;
 
-	for (int i = 0; i < ROWS; i++) {
-		for (int j = 0; j < COLUMNS; j++) {
-			elements_length.elements_length[i + j] =
-				find_number_length(matrix.values[i][j]);
+	const int ROWS = matrix -> dimensions -> rows;
+	const int COLUMNS = matrix -> dimensions -> columns;
+
+	if (elements_length != NULL) {
+		elements_length -> elements_length_count = MATRIX_ELEMENTS_COUNT;
+		elements_length -> elements_length = new int[MATRIX_ELEMENTS_COUNT];
+
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLUMNS; j++) {
+				assert(elements_length->elements_length != NULL);
+
+				elements_length -> elements_length[i + j] =
+					find_number_length(matrix -> values[j][i]);
+			}
 		}
+	}
+	else {
+
 	}
 
 	return elements_length;
@@ -160,7 +175,20 @@ struct matrix_elements_length get_matrix_elements_length(
 /// <param name="elements">matrix elements length</param>
 /// <returns>longest number length</returns>
 int get_longest_number_length(
-	struct matrix_elements_length elements) {
+	struct matrix_elements_length * elements) {
 
+	int longest_number_length = INT_MIN;
+	const int ELEMENTS_COUNT = elements -> elements_length_count;
 
+	for (int i = 0; i < ELEMENTS_COUNT; i++) {
+		int number_length = elements->elements_length[i];
+
+		if (longest_number_length < 
+			number_length) {
+
+			longest_number_length = number_length;
+		}
+	}
+
+	return longest_number_length;
 }
