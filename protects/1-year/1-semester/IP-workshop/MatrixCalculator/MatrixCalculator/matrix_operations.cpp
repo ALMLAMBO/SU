@@ -78,18 +78,61 @@ void matrices_multiplication() {
 }
 
 /// <summary>
-/// Finds matrix determinant
+/// Finds matrix determinant using Sarus's rule
 /// </summary>
 /// <returns>determinant value</returns>
-int calculate_matrix_determinant() {
+double calculate_matrix_determinant() {
+	const char* filename = "matrix_det.txt";
+	ifstream matrix_det;
+	matrix_det.open(filename);
 
+	double determinant = INT_MIN;
+
+	if (matrix_det.is_open()) {
+		struct matrix_dimensions* sizes =
+			get_matrix_dimensions(matrix_det);
+
+		struct matrix_representation* matrix =
+			new struct matrix_representation[1];
+
+		matrix -> dimensions = sizes;
+		const int ROWS = matrix -> dimensions -> rows;
+		const int COLUMNS = matrix -> dimensions -> columns;
+
+		if (ROWS == COLUMNS && 
+			(ROWS <= 4 && COLUMNS <= 4)) {
+
+			matrix -> values = get_matrix_values(
+				matrix_det, matrix -> dimensions);
+
+			double** extended_matrix_values = new double* [ROWS];
+			const int EXTENDED_MATRIX_VALUES_COLUMNS = COLUMNS * 2 - 1;
+			
+			for (int i = 0; i < ROWS; i++) {
+				extended_matrix_values[i] = new double[
+					EXTENDED_MATRIX_VALUES_COLUMNS];
+
+				for (int j = 0; j < COLUMNS; j++) {
+					extended_matrix_values[i][j] = 
+						matrix -> values[i][j];
+				}
+
+				for (int j = 0; j < COLUMNS - 1; j++) {
+					extended_matrix_values[i][COLUMNS + j] =
+						matrix -> values[i][j];
+				}
+			}
+
+
+		}
+	}
 }
 
 /// <summary>
 /// Divides matrix with number
 /// </summary>
 void matrix_division_with_number() {
-
+	
 }
 
 /// <summary>

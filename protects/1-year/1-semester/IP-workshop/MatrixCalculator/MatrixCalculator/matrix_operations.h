@@ -19,7 +19,8 @@ struct matrix_elements_length {
 //Required
 void matrix_multiplication_with_number();
 void matrices_multiplication();
-int calculate_matrix_determinant();
+double calculate_matrix_determinant();
+
 void matrix_division_with_number();
 struct matrix_representation * find_matrix_inverse();
 struct matrix_representation * matrix_transposition();
