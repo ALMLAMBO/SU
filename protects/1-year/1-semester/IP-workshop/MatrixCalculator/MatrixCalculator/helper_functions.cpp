@@ -1,7 +1,6 @@
 #include <iostream>
 #include "helper_functions.h"
 #include "matrix_operations.h"
-#include <cassert>
 
 using namespace std;
 
@@ -155,15 +154,13 @@ struct matrix_elements_length * get_matrix_elements_length(
 
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLUMNS; j++) {
-				assert(elements_length->elements_length != NULL);
-
 				elements_length -> elements_length[i + j] =
 					find_number_length(matrix -> values[j][i]);
 			}
 		}
 	}
 	else {
-
+		return NULL;
 	}
 
 	return elements_length;
