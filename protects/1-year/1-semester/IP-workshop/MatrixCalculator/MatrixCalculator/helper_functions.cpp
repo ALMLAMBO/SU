@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "helper_functions.h"
 #include "matrix_operations.h"
 
@@ -82,4 +84,40 @@ double absolute_value(double number) {
 	}
 	
 	return result;
+}
+
+/// <summary>
+/// Get matrix rows and columns counts
+/// </summary>
+/// <param name="file">reference input file stream to read</param>
+/// <returns>reference to matrix dimensions structure with dimensions set</returns>
+MatrixDimensions& get_matrix_dimensions(ifstream& file) {
+	MatrixDimensions dimensions;
+	const int MAX_DIMENSION_LENGTH = 12;
+	const int CYCLE_ITERATIONS = 2;
+	bool set_row = false;
+
+	for (int i = 0; i < CYCLE_ITERATIONS; i++) {
+		char* dimension_as_string = new char[MAX_DIMENSION_LENGTH];
+		file.getline(dimension_as_string, MAX_DIMENSION_LENGTH);
+		
+		int dimension_length = strlen(dimension_as_string);
+		char* first_number_of_dimension = dimension_as_string + 1;
+		char* filtered_dimension_as_string = 
+			new char[MAX_DIMENSION_LENGTH - 2];
+
+		strncpy(filtered_dimension_as_string, 
+			first_number_of_dimension, dimension_length - 2);
+
+		int dimension = stoi(filtered_dimension_as_string);
+		
+		if (set_row) {
+			dimensions.set_rows(dimension);
+		}
+		else {
+			dimensions.set_columns(dimension);
+		}
+	}
+
+	return dimensions;
 }
