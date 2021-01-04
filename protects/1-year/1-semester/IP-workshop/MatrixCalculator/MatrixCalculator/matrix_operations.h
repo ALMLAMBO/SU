@@ -39,8 +39,6 @@ struct MatrixRepresentation {
 		double** values_;
 
 	public:
-		MatrixRepresentation() { }
-
 		MatrixRepresentation(MatrixDimensions& dimensions) : 
 			dimensions_(dimensions), values_(NULL) { }
 
@@ -93,7 +91,7 @@ struct MatrixRepresentation {
 };
 
 //Required
-MatrixRepresentation& matrix_multiplication_with_number(
+MatrixRepresentation matrix_multiplication_with_number(
 	const char * filename);
 
 //void matrices_multiplication();
