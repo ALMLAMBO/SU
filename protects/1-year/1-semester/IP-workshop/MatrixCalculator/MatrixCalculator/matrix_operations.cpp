@@ -12,24 +12,16 @@ using namespace std;
 /// </summary>
 /// <param name="filename">file to read</param>
 /// <param name="option">integer for which operation to choose</param>
-void matrix_operations_manager(const char* filename, int option) {
-	ifstream file;
-	file.open(filename);
+void matrix_operations_manager(int option) {
+	const char* MATRIX_MULT_FILENAME = "matrix_mult_number.txt";
 
-	if (file.is_open()) {
-		switch (option) {
-			case 1: 
-				matrix_multiplication_with_number(filename); 
-				break;
+	switch (option) {
+		case 1:
+			matrix_multiplication_with_number(MATRIX_MULT_FILENAME);
+			break;
 
-			default:
-				cout << "Invalid operation" << endl;
-				break;
-		}
-	}
-	else {
-		cout << "File not opened successfully" << endl;
-
-		return;
+		default:
+			cout << "Invalid operation" << endl;
+			break;
 	}
 }
