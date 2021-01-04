@@ -39,9 +39,10 @@ struct MatrixRepresentation {
 		double** values_;
 
 	public:
-		MatrixRepresentation() {
-			values_ = NULL;
-		}
+		MatrixRepresentation() { }
+
+		MatrixRepresentation(MatrixDimensions& dimensions) : 
+			dimensions_(dimensions), values_(NULL) { }
 
 		void set_dimensions(MatrixDimensions& dimensions) {
 			dimensions_ = dimensions;
@@ -95,16 +96,16 @@ struct MatrixRepresentation {
 MatrixRepresentation& matrix_multiplication_with_number(
 	const char * filename);
 
-void matrices_multiplication();
-double calculate_matrix_determinant();
-void matrix_division_with_number();
-struct matrix_representation * find_matrix_inverse();
-struct matrix_representation * matrix_transposition();
-void singular_value_decomposition();
-
-//Optional
-void matrix_sum_substract(bool sum);
-void matrices_division();
+//void matrices_multiplication();
+//double calculate_matrix_determinant();
+//void matrix_division_with_number();
+//struct matrix_representation * find_matrix_inverse();
+//struct matrix_representation * matrix_transposition();
+//void singular_value_decomposition();
+//
+////Optional
+//void matrix_sum_substract(bool sum);
+//void matrices_division();
 
 void matrix_operations_manager(int option);
 
