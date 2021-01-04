@@ -106,6 +106,6 @@ void singular_value_decomposition();
 void matrix_sum_substract(bool sum);
 void matrices_division();
 
-void matrix_operations_manager(const char* filename, int option);
+void matrix_operations_manager(int option);
 
 #endif // !__MATRIX_OPERATIONS__
