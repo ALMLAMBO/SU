@@ -28,7 +28,7 @@ double calclulate_sqrt(double number) {
 		//https://stackoverflow.com/questions/33299667/program-to-calculate-square-root-c
 		//First answer second algorithm
 		int left = 1;
-		int right = number / 2 + 1;
+		int right = (int)(number / 2 + 1);
 
 		while (left <= right) {
 			int mid = left + ((right - left) / 2);
@@ -90,8 +90,8 @@ double absolute_value(double number) {
 /// Get matrix rows and columns counts
 /// </summary>
 /// <param name="file">reference input file stream to read</param>
-/// <returns>reference to matrix dimensions structure with dimensions set</returns>
-MatrixDimensions& get_matrix_dimensions(ifstream& file) {
+/// <returns>matrix dimensions structure with dimensions set</returns>
+MatrixDimensions get_matrix_dimensions(std::ifstream& file) {
 	MatrixDimensions dimensions;
 	const int MAX_DIMENSION_LENGTH = 12;
 	const int CYCLE_ITERATIONS = 2;
@@ -106,8 +106,10 @@ MatrixDimensions& get_matrix_dimensions(ifstream& file) {
 		char* filtered_dimension_as_string = 
 			new char[MAX_DIMENSION_LENGTH - 2];
 
-		strncpy(filtered_dimension_as_string, 
-			first_number_of_dimension, dimension_length - 2);
+		for (int i = 1; i < MAX_DIMENSION_LENGTH - 3; i++) {
+			filtered_dimension_as_string[i - 1] =
+				dimension_as_string[i];
+		}
 
 		int dimension = stoi(filtered_dimension_as_string);
 		
