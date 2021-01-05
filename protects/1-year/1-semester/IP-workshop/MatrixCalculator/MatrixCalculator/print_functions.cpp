@@ -19,3 +19,22 @@ void print_available_operations() {
 	cout << "(Optional)9. Matrices subtraction" << endl;
 	cout << "(Optional)10. Matrices division" << endl;
 }
+
+/// <summary>
+/// Prints matrix
+/// </summary>
+/// <param name="matrix">matrix to print</param>
+void print_matrix(MatrixRepresentation& matrix) {
+	const int ROWS = matrix.get_dimensions().get_rows();
+	const int COLUMNS = matrix.get_dimensions().get_columns();
+
+	for (int i = 0; i < ROWS; i++) {
+		cout << (char)186;
+
+		for (int j = 0; j < COLUMNS; j++) {
+			cout << " " << matrix.get_values()[i][j];
+		}
+
+		cout << (char)186 << endl;
+	}
+}
