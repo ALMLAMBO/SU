@@ -242,3 +242,47 @@ double calculate_matrix_determinant(
 
 	return determinant;
 }
+
+/// <summary>
+/// Divides matrix with given number if it is possible
+/// </summary>
+/// <param name="matrix">input matrix</param>
+/// <param name="scalar">number to divide matrix</param>
+/// <returns>result after division</returns>
+MatrixRepresentation matrix_division_with_number(
+	MatrixRepresentation matrix, double scalar) {
+
+	const int ROWS = matrix.get_dimensions().get_rows();
+	const int COLUMNS = matrix.get_dimensions().get_columns();
+
+	MatrixDimensions result_matrix_dimensions;
+	result_matrix_dimensions.set_rows(ROWS);
+	result_matrix_dimensions.set_columns(COLUMNS);
+	MatrixRepresentation result_matrix(result_matrix_dimensions);
+
+	if (scalar != 0) {
+		result_matrix.init_empty_matrix_values();
+		double** result_matrix_values = new double* [ROWS];
+
+		for (int i = 0; i < ROWS; i++) {
+			result_matrix_values[i] = new double[COLUMNS];
+
+			for (int j = 0; j < COLUMNS; j++) {
+				result_matrix_values[i][j] = matrix
+					.get_values()[i][j] / scalar;
+			}
+		}
+
+		result_matrix.set_values(result_matrix_values);
+
+		for (int i = 0; i < ROWS; i++) {
+			delete[] result_matrix_values[i];
+		}
+
+		delete[] result_matrix_values;
+		result_matrix_values = NULL;
+	}
+	else {
+		return result_matrix;
+	}
+}
