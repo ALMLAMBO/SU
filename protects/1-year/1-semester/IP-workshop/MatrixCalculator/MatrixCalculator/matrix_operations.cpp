@@ -14,6 +14,8 @@ using namespace std;
 /// <param name="option">integer for which operation to choose</param>
 void matrix_operations_manager(int option) {
 	const char* MATRIX_MULT_FILENAME = "matrix_mult_number.txt";
+	const char* MATRICES_MULT_FIRST_MATRIX = "matrix_mult_first.txt";
+	const char* MATRICES_MULT_SECOND_MATRIX = "matrix_mult_second.txt";
 
 	switch (option) {
 		case 1: {
@@ -26,6 +28,21 @@ void matrix_operations_manager(int option) {
 			}
 			break;
 
+		case 2: {
+			MatrixRepresentation first_matrix =
+				get_matrix(MATRICES_MULT_FIRST_MATRIX);
+
+			MatrixRepresentation second_matrix =
+				get_matrix(MATRICES_MULT_SECOND_MATRIX);
+
+			MatrixRepresentation result_matrix =
+				matrices_multiplication(first_matrix, second_matrix);
+
+			print_matrix(result_matrix);
+
+			break;
+		}
+
 		default:
 			cout << "Invalid operation" << endl;
 			break;
@@ -35,19 +52,7 @@ void matrix_operations_manager(int option) {
 MatrixRepresentation matrix_multiplication_with_number(
 	const char* filename) {
 
-	ifstream matrix_mult_number;
-	matrix_mult_number.open(filename);
-
-	if (!matrix_mult_number.is_open()) {
-		MatrixDimensions dimensions;
-		dimensions.set_rows(INT_MIN);
-		dimensions.set_columns(INT_MIN);
-
-		MatrixRepresentation matrix(dimensions);
-		return matrix;
-	}
-
-	MatrixRepresentation matrix = get_matrix(matrix_mult_number);
+	MatrixRepresentation matrix = get_matrix(filename);
 	double scalar = get_scalar(matrix_mult_number);
 
 	MatrixDimensions dimensions = matrix.get_dimensions();
@@ -77,4 +82,11 @@ MatrixRepresentation matrix_multiplication_with_number(
 	result_matrix_values = NULL;
 
 	return result_matrix;
+}
+
+MatrixRepresentation matrices_multiplication(
+	MatrixRepresentation first_matrix,
+	MatrixRepresentation second_matrix) {
+
+
 }
