@@ -166,15 +166,21 @@ double** get_matrix_values(std::ifstream& file,
 /// </summary>
 /// <param name="file">file stream to read</param>
 /// <returns>matrix with values and dimensions set</returns>
-MatrixRepresentation get_matrix(std::ifstream& file) {
-	MatrixDimensions dimensions = get_matrix_dimensions(file);
-	MatrixRepresentation matrix(dimensions);
-	matrix.init_empty_matrix_values();
+MatrixRepresentation get_matrix(const char * filename) {
+	ifstream file;
+	file.open(filename);
+	MatrixRepresentation matrix;
 
-	double** values = get_matrix_values(file, dimensions);
-	matrix.set_values(values);
+	if (file.is_open()) {
+		MatrixDimensions dimensions = get_matrix_dimensions(file);
+		matrix.set_dimensions(dimensions);
+		matrix.init_empty_matrix_values();
 
-	print_matrix(matrix);
+		double** values = get_matrix_values(file, dimensions);
+		matrix.set_values(values);
+
+		print_matrix(matrix);
+	}
 
 	return matrix;
 }
