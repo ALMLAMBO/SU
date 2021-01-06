@@ -185,15 +185,21 @@ MatrixRepresentation get_matrix(const char * filename) {
 	return matrix;
 }
 
-double get_scalar(std::ifstream& file) {
-	const int MAX_NUMBER_LENGTH = 320;
+double get_scalar(const char * filename) {
+	ifstream file(filename);
+	double scalar = 0;
+	
+	if (file.is_open()) {
+		file.seekg(0, ios_base::end);
+		int scalar_length = file.tellg();
 
-	char* scalar_as_string = new char[MAX_NUMBER_LENGTH];
-	file.getline(scalar_as_string, MAX_NUMBER_LENGTH);
+		char* scalar_as_string = new char[scalar_length];
+		file.getline(scalar_as_string, scalar_length);
 
-	double scalar = stof(scalar_as_string);
-	delete[] scalar_as_string;
-	scalar_as_string = NULL;
+		double scalar = stof(scalar_as_string);
+		delete[] scalar_as_string;
+		scalar_as_string = NULL;
+	}
 
 	return scalar;
 }
