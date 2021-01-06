@@ -11,7 +11,7 @@ MatrixDimensions get_matrix_dimensions(std::ifstream& file);
 double** get_matrix_values(std::ifstream& file, 
 	MatrixDimensions dimensions);
 
-MatrixRepresentation get_matrix(std::ifstream& file);
-double get_scalar(std::ifstream& file);
+MatrixRepresentation get_matrix(const char * filename);
+double get_scalar(const char * filename);
 
 #endif // !__HELPER_FUNCTIONS__
