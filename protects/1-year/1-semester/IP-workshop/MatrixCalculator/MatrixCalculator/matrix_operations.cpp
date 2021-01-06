@@ -286,3 +286,42 @@ MatrixRepresentation matrix_division_with_number(
 		return result_matrix;
 	}
 }
+
+/// <summary>
+/// Transpose a matrix
+/// </summary>
+/// <param name="matrix">input matrix</param>
+/// <returns>transposed matrix</returns>
+MatrixRepresentation matrix_transposition(
+	MatrixRepresentation matrix) {
+
+	const int ROWS = matrix.get_dimensions().get_rows();
+	const int COLUMNS = matrix.get_dimensions().get_columns();
+
+	MatrixDimensions result_matrix_dimensions;
+	result_matrix_dimensions.set_rows(COLUMNS);
+	result_matrix_dimensions.set_columns(ROWS);
+	MatrixRepresentation result_matrix(result_matrix_dimensions);
+
+	double** result_matrix_values = new double* [ROWS];
+
+	for (int i = 0; i < ROWS; i++) {
+		result_matrix_values[i] = new double[COLUMNS];
+
+		for (int j = 0; j < COLUMNS; j++) {
+			result_matrix_values[i][j] = matrix
+				.get_values()[j][i];
+		}
+	}
+
+	result_matrix.set_values(result_matrix_values);
+
+	for (int i = 0; i < ROWS; i++) {
+		delete[] result_matrix_values[i];
+	}
+
+	delete[] result_matrix_values;
+	result_matrix_values = NULL;
+
+	return result_matrix;
+}
