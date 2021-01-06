@@ -16,6 +16,7 @@ void matrix_operations_manager(int option) {
 	const char* MATRIX_MULT_FILENAME = "matrix_mult_number.txt";
 	const char* MATRICES_MULT_FIRST_MATRIX = "matrix_mult_first.txt";
 	const char* MATRICES_MULT_SECOND_MATRIX = "matrix_mult_second.txt";
+	const char* MATRIX_DETERMINANT_FILENAME = "matrix_det.txt";
 
 	switch (option) {
 		case 1: {
@@ -41,6 +42,16 @@ void matrix_operations_manager(int option) {
 			print_matrix(result_matrix);
 
 			break;
+		}
+
+		case 3: {
+			MatrixRepresentation matrix_to_find_det =
+				get_matrix(MATRIX_DETERMINANT_FILENAME);
+
+			double determinant = calculate_matrix_determinant(
+				matrix_to_find_det);
+
+			cout << " = " << determinant << endl;
 		}
 
 		default:
@@ -141,4 +152,93 @@ MatrixRepresentation matrices_multiplication(
 	else {
 		return result_matrix;
 	}
+
+	return result_matrix;
+}
+
+/// <summary>
+/// Calculates matrix determinant using Sarrus's rule
+/// </summary>
+/// <param name="matrix">input matrix</param>
+/// <returns>matrix determinant</returns>
+double calculate_matrix_determinant(
+	MatrixRepresentation matrix) {
+
+	const int ROWS = matrix
+		.get_dimensions().get_rows();
+	
+	const int COLUMNS = matrix
+		.get_dimensions().get_columns();
+
+	double determinant = DBL_MIN;
+
+	if (ROWS == COLUMNS) {
+		double main_diagonals_sum = 0;
+		double secondary_diagonals_sum = 0;
+		double main_diagonal_mult = 1;
+		double secondary_diagonal_mult = 1;
+
+		double** extended_matrix_values = new double* [ROWS];
+		int extended_matrix_columns = COLUMNS * 2 - 1;
+		for (int i = 0; i < ROWS; i++) {
+			extended_matrix_values[i] = 
+				new double[extended_matrix_columns];
+
+			for (int j = 0; j < COLUMNS; j++) {
+				extended_matrix_values[i][j] = matrix
+					.get_values()[i][j];
+			}
+
+			for (int j = 0; j < COLUMNS - 1; j++) {
+				extended_matrix_values[i][COLUMNS + j] = matrix
+					.get_values()[i][j];
+			}
+		}
+
+		int middle_column = COLUMNS - 1;
+
+		for (int i = 0; i < ROWS; i++) {
+			main_diagonal_mult *=
+				extended_matrix_values[i][i + middle_column];
+
+			secondary_diagonal_mult *=
+				extended_matrix_values[i][middle_column - i];
+		}
+
+		main_diagonals_sum += main_diagonal_mult;
+		secondary_diagonals_sum += secondary_diagonal_mult;
+		main_diagonal_mult = 1;
+		secondary_diagonal_mult = 1;
+
+		int rows_between_first_last = ROWS - 2;
+
+		for (int k = 1; k <= rows_between_first_last; k++) {
+			for (int i = 0; i < ROWS; i++) {
+				int second_index = middle_column + k;
+
+				main_diagonal_mult *=
+					extended_matrix_values[i][second_index];
+
+				secondary_diagonal_mult *=
+					extended_matrix_values[i][second_index - i];
+			}
+
+			main_diagonals_sum += main_diagonal_mult;
+			secondary_diagonals_sum += secondary_diagonal_mult;
+			main_diagonal_mult = 1;
+			secondary_diagonal_mult = 1;
+		}
+
+		for (int i = 0; i < COLUMNS; i++) {
+			main_diagonal_mult *=
+				extended_matrix_values[i][i];
+
+			secondary_diagonal_mult *=
+				extended_matrix_values[i][extended_matrix_columns - i];
+		}
+
+		determinant = main_diagonals_sum - secondary_diagonals_sum;
+	}
+
+	return determinant;
 }
