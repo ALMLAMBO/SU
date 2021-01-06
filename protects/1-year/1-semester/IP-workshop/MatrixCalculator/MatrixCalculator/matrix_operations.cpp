@@ -53,7 +53,7 @@ MatrixRepresentation matrix_multiplication_with_number(
 	const char* filename) {
 
 	MatrixRepresentation matrix = get_matrix(filename);
-	double scalar = get_scalar(matrix_mult_number);
+	double scalar = get_scalar(filename);
 
 	MatrixDimensions dimensions = matrix.get_dimensions();
 	MatrixRepresentation result_matrix(dimensions);
@@ -84,9 +84,61 @@ MatrixRepresentation matrix_multiplication_with_number(
 	return result_matrix;
 }
 
+/// <summary>
+/// Multiplies two matrices
+/// </summary>
+/// <param name="first_matrix">left matrix</param>
+/// <param name="second_matrix">right matrix</param>
+/// <returns>result matrix after multiplication</returns>
 MatrixRepresentation matrices_multiplication(
 	MatrixRepresentation first_matrix,
 	MatrixRepresentation second_matrix) {
 
+	const int ROWS_FIRST_MATRIX = first_matrix
+		.get_dimensions().get_rows();
 
+	const int COLUMNS_FIRST_MATRIX = first_matrix
+		.get_dimensions().get_columns();
+
+	const int ROWS_SECOND_MATRIX = second_matrix
+		.get_dimensions().get_rows();
+
+	const int COLUMNS_SECOND_MATRIX = second_matrix
+		.get_dimensions().get_rows();
+
+	MatrixDimensions result_matrix_dimensions;
+	result_matrix_dimensions.set_rows(ROWS_FIRST_MATRIX);
+	result_matrix_dimensions.set_columns(COLUMNS_SECOND_MATRIX);
+	MatrixRepresentation result_matrix(result_matrix_dimensions);
+
+	if (COLUMNS_FIRST_MATRIX == ROWS_SECOND_MATRIX) {
+		result_matrix.init_empty_matrix_values();
+
+		double** result_matrix_values = new double* [ROWS_FIRST_MATRIX];
+		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
+			result_matrix_values[i] = new double[COLUMNS_SECOND_MATRIX];
+		}
+
+		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
+			for (int j = 0; j < COLUMNS_SECOND_MATRIX; j++) {
+				for (int k = 0; k < COLUMNS_FIRST_MATRIX; i++) {
+					result_matrix_values[i][j] +=
+						first_matrix.get_values()[i][k] *
+						second_matrix.get_values()[k][j];
+				}
+			}
+		}
+
+		result_matrix.set_values(result_matrix_values);
+
+		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
+			delete[] result_matrix_values[i];
+		}
+
+		delete[] result_matrix_values;
+		result_matrix_values = NULL;
+	}
+	else {
+		return result_matrix;
+	}
 }
