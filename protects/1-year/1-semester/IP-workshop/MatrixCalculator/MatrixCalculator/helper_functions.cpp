@@ -3,6 +3,7 @@
 #include <string>
 #include "helper_functions.h"
 #include "matrix_operations.h"
+#include "print_functions.h"
 
 using namespace std;
 
@@ -95,26 +96,17 @@ MatrixDimensions get_matrix_dimensions(std::ifstream& file) {
 	MatrixDimensions dimensions;
 	const int MAX_DIMENSION_LENGTH = 12;
 	const int CYCLE_ITERATIONS = 2;
-	bool set_row = false;
+	bool set_row = true;
 
 	for (int i = 0; i < CYCLE_ITERATIONS; i++) {
 		char* dimension_as_string = new char[MAX_DIMENSION_LENGTH];
 		file.getline(dimension_as_string, MAX_DIMENSION_LENGTH);
-		
-		int dimension_length = strlen(dimension_as_string);
-		char* first_number_of_dimension = dimension_as_string + 1;
-		char* filtered_dimension_as_string = 
-			new char[MAX_DIMENSION_LENGTH - 2];
 
-		for (int i = 1; i < MAX_DIMENSION_LENGTH - 3; i++) {
-			filtered_dimension_as_string[i - 1] =
-				dimension_as_string[i];
-		}
-
-		int dimension = stoi(filtered_dimension_as_string);
+		int dimension = stoi(dimension_as_string);
 		
 		if (set_row) {
 			dimensions.set_rows(dimension);
+			set_row = false;
 		}
 		else {
 			dimensions.set_columns(dimension);
@@ -122,4 +114,80 @@ MatrixDimensions get_matrix_dimensions(std::ifstream& file) {
 	}
 
 	return dimensions;
+}
+
+double** get_matrix_values(std::ifstream& file,
+	MatrixDimensions dimensions) {
+
+	const int ROWS = dimensions.get_rows();
+	const int COLUMNS = dimensions.get_columns();
+	const int MAX_NUMBER_LENGTH = 320;
+
+	double** matrix_values = new double* [ROWS];
+	for (int i = 0; i < ROWS; i++) {
+		matrix_values[i] = new double[COLUMNS];
+
+		char symbol = '\0';
+		int column = 0;
+
+		while (symbol != '\n') {
+			char* number_as_string = new char[MAX_NUMBER_LENGTH];
+			int number_length = 0;
+
+			while (symbol != (char)32) {
+				if ((symbol >= '0' && symbol <= '9' 
+					&& symbol != '\n') || symbol == '.') {
+
+					number_as_string[number_length++] = symbol;
+				}
+
+				if (symbol != '\n') {
+					symbol = file.get();
+				}
+			}
+
+			if (number_length != 0) {
+				number_as_string[number_length] = '\0';
+				int number = stof(number_as_string);
+
+				matrix_values[i][column++] = number;
+			}
+			else {
+				file.get(symbol);
+			}
+		}
+	}
+
+	return matrix_values;
+}
+
+/// <summary>
+/// Initialises matrix representation variable
+/// </summary>
+/// <param name="file">file stream to read</param>
+/// <returns>matrix with values and dimensions set</returns>
+MatrixRepresentation get_matrix(std::ifstream& file) {
+	MatrixDimensions dimensions = get_matrix_dimensions(file);
+	MatrixRepresentation matrix(dimensions);
+	matrix.init_empty_matrix_values();
+
+	double** values = get_matrix_values(file, dimensions);
+	matrix.set_values(values);
+
+	print_matrix(matrix);
+
+	return matrix;
+}
+
+double get_scalar(std::ifstream& file) {
+	const int MAX_NUMBER_LENGTH = 320;
+
+	char* scalar_as_string = new char[MAX_NUMBER_LENGTH];
+	file.getline(scalar_as_string, MAX_NUMBER_LENGTH);
+
+	double scalar = stof(scalar_as_string);
+	delete[] scalar_as_string;
+	scalar_as_string = NULL;
+
+	return scalar;
 }
