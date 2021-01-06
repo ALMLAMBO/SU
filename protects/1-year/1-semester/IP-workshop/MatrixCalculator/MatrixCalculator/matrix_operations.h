@@ -94,16 +94,26 @@ struct MatrixRepresentation {
 MatrixRepresentation matrix_multiplication_with_number(
 	const char * filename);
 
-//void matrices_multiplication();
-//double calculate_matrix_determinant();
-//void matrix_division_with_number();
-//struct matrix_representation * find_matrix_inverse();
-//struct matrix_representation * matrix_transposition();
-//void singular_value_decomposition();
+MatrixRepresentation matrices_multiplication(
+	MatrixRepresentation first_matrix,
+	MatrixRepresentation second_matrix);
+
+double calculate_matrix_determinant(
+	MatrixRepresentation matrix);
+
+MatrixRepresentation matrix_division_with_number(
+	MatrixRepresentation matrix, double scalar);
+
+MatrixRepresentation find_matrix_inverse(
+	MatrixRepresentation matrix);
+
+MatrixRepresentation matrix_transposition(
+	MatrixRepresentation matrix);
 //
 ////Optional
 //void matrix_sum_substract(bool sum);
 //void matrices_division();
+//void singular_value_decomposition();
 
 void matrix_operations_manager(int option);
 
