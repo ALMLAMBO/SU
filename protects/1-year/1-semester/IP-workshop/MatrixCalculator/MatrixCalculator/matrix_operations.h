@@ -39,6 +39,8 @@ struct MatrixRepresentation {
 		double** values_;
 
 	public:
+		MatrixRepresentation() { }
+		
 		MatrixRepresentation(MatrixDimensions& dimensions) : 
 			dimensions_(dimensions), values_(NULL) { }
 
