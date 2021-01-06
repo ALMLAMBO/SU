@@ -288,6 +288,90 @@ MatrixRepresentation matrix_division_with_number(
 }
 
 /// <summary>
+/// finds matrix inverse from given one
+/// </summary>
+/// <param name="matrix">input matrix</param>
+/// <returns>inverse matrix if exists</returns>
+MatrixRepresentation find_matrix_inverse(
+	MatrixRepresentation matrix) {
+
+	const int ROWS = matrix.get_dimensions().get_rows();
+	const int COLUMNS = matrix.get_dimensions().get_columns();
+
+	MatrixDimensions inverse_matrix_dimensions;
+	inverse_matrix_dimensions.set_rows(ROWS);
+	inverse_matrix_dimensions.set_columns(COLUMNS);
+	MatrixRepresentation inverse_matrix(inverse_matrix_dimensions);
+
+	if (ROWS == COLUMNS) {
+		double determinant = 
+			calculate_matrix_determinant(matrix);
+	
+		if (determinant != 0) {
+			double** matrix_values = new double* [ROWS];
+			for (int i = 0; i < ROWS; i++) {
+				matrix_values[i] = new double[COLUMNS];
+			}
+
+			const int SUB_MATRIX_ROWS = ROWS - 1;
+			const int SUB_MATRIX_COLUMNS = COLUMNS - 1;
+			MatrixDimensions sub_matrix_dimensions;
+
+			sub_matrix_dimensions.set_rows(SUB_MATRIX_ROWS);
+			sub_matrix_dimensions.set_columns(SUB_MATRIX_COLUMNS);
+
+			for (int i = 0; i < ROWS; i++) {
+				for (int j = 0; j < COLUMNS; j++) {
+					double** sub_matrix_values =
+						new double* [SUB_MATRIX_ROWS];
+
+					for (int k = 0; i < SUB_MATRIX_ROWS; i++) {
+						sub_matrix_values[i] = 
+							new double[SUB_MATRIX_COLUMNS];
+
+						for (int l = 0; i < SUB_MATRIX_COLUMNS; j++) {
+							if (k != i && l != j) {
+								sub_matrix_values[k][l] =
+									matrix.get_values()[k][l];
+							}
+						}
+					}
+
+					MatrixRepresentation sub_matrix(sub_matrix_dimensions);
+					sub_matrix.set_values(sub_matrix_values);
+
+					double sub_determinant =
+						calculate_matrix_determinant(sub_matrix);
+
+					matrix_values[j][i] = sub_determinant;
+
+					for (int k = 0; k < SUB_MATRIX_ROWS; k++) {
+						delete[] sub_matrix_values[k];
+					}
+
+					delete[] sub_matrix_values;
+					sub_matrix_values = NULL;
+				}
+			}
+
+			inverse_matrix.set_values(matrix_values);
+			
+			for (int i = 0; i < ROWS; i++) {
+				delete[] matrix_values[i];
+			}
+
+			delete[] matrix_values;
+			matrix_values = NULL;
+		}
+	}
+	else {
+		return inverse_matrix;
+	}
+
+	return inverse_matrix;
+}
+
+/// <summary>
 /// Transpose a matrix
 /// </summary>
 /// <param name="matrix">input matrix</param>
