@@ -285,6 +285,8 @@ MatrixRepresentation matrix_division_with_number(
 	else {
 		return result_matrix;
 	}
+
+	return result_matrix;
 }
 
 /// <summary>
