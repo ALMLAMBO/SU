@@ -127,34 +127,30 @@ double** get_matrix_values(std::ifstream& file,
 	for (int i = 0; i < ROWS; i++) {
 		matrix_values[i] = new double[COLUMNS];
 
-		char symbol = '\0';
+		int line_length = file.tellg();
+		char* line_content = new char[line_length];
+		file.getline(line_content, line_length);
 		int column = 0;
 
-		while (symbol != '\n') {
+		for (int i = 0; i < line_length; i++) {
 			char* number_as_string = new char[MAX_NUMBER_LENGTH];
-			int number_length = 0;
+			char symbol = line_content[i];
 
+			int number_length = 0;
 			while (symbol != (char)32) {
-				if ((symbol >= '0' && symbol <= '9' 
-					&& symbol != '\n') || symbol == '.') {
+				if ((symbol >= '0' && symbol <= '9')
+					|| symbol == '.') {
 
 					number_as_string[number_length++] = symbol;
 				}
-
-				if (symbol != '\n') {
-					symbol = file.get();
-				}
 			}
 
-			if (number_length != 0) {
-				number_as_string[number_length] = '\0';
-				int number = stof(number_as_string);
+			number_as_string[number_length] = '\0';
+			double number = stof(number_as_string);
+			matrix_values[i][column++] = number;
 
-				matrix_values[i][column++] = number;
-			}
-			else {
-				file.get(symbol);
-			}
+			delete[] number_as_string;
+			number_as_string = NULL;
 		}
 	}
 
