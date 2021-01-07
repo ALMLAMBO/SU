@@ -17,6 +17,9 @@ void matrix_operations_manager(int option) {
 	const char* MATRICES_MULT_FIRST_MATRIX = "matrix_mult_first.txt";
 	const char* MATRICES_MULT_SECOND_MATRIX = "matrix_mult_second.txt";
 	const char* MATRIX_DETERMINANT_FILENAME = "matrix_det.txt";
+	const char* MATRIX_DIVISION_NUMBER = "matrix_div_number.txt";
+	const char* INVERSE_MATRIX = "matrix_inverse.txt";
+	const char* TRANSPOSE = "matrix_transpose.txt";
 
 	switch (option) {
 		case 1: {
@@ -24,6 +27,7 @@ void matrix_operations_manager(int option) {
 					matrix_multiplication_with_number(
 						MATRIX_MULT_FILENAME);
 
+				cout << endl;
 				print_matrix(result_matrix);
 				result_matrix.destroy_matrix_values();
 			}
@@ -52,6 +56,37 @@ void matrix_operations_manager(int option) {
 				matrix_to_find_det);
 
 			cout << " = " << determinant << endl;
+		}
+
+		case 4: {
+			MatrixRepresentation matrix_div_number =
+				get_matrix(MATRIX_DIVISION_NUMBER);
+
+			double scalar = get_scalar(MATRIX_DIVISION_NUMBER);
+			MatrixRepresentation result_matrix_div_number =
+				matrix_division_with_number(matrix_div_number, scalar);
+		}
+
+		case 5: {
+			MatrixRepresentation input_matrix_inverse =
+				get_matrix(INVERSE_MATRIX);
+
+			MatrixRepresentation inverse_matrix =
+				find_matrix_inverse(input_matrix_inverse);
+
+			cout << endl;
+			print_matrix(inverse_matrix);
+		}
+
+		case 6: {
+			MatrixRepresentation input_transpose =
+				get_matrix(TRANSPOSE);
+
+			MatrixRepresentation transpose =
+				matrix_transposition(input_transpose);
+
+			cout << endl;
+			print_matrix(transpose);
 		}
 
 		default:
