@@ -23,7 +23,7 @@ struct MatrixDimensions {
 			return columns_;
 		}
 
-		MatrixDimensions& operator=(const MatrixDimensions& dimens) {
+		MatrixDimensions operator=(const MatrixDimensions& dimens) {
 			MatrixDimensions sizes;
 			
 			sizes.set_rows(dimens.get_rows());
@@ -39,7 +39,8 @@ struct MatrixRepresentation {
 		double** values_;
 
 	public:
-		MatrixRepresentation() { }
+		MatrixRepresentation() : 
+			dimensions_(), values_(NULL) { }
 		
 		MatrixRepresentation(MatrixDimensions& dimensions) : 
 			dimensions_(dimensions), values_(NULL) { }
