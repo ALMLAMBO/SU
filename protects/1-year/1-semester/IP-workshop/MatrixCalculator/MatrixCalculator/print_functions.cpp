@@ -14,10 +14,9 @@ void print_available_operations() {
 	cout << "4. Matrix division with number" << endl;
 	cout << "5. Find inverse matrix" << endl;
 	cout << "6. Matrix transpose" << endl;
-	cout << "7. Singular value decomposition (SVD)" << endl;
-	cout << "(Optional)8. Matrices sum" << endl;
-	cout << "(Optional)9. Matrices subtraction" << endl;
-	cout << "(Optional)10. Matrices division" << endl;
+	cout << "(Optional)7. Matrices sum" << endl;
+	cout << "(Optional)8. Matrices subtraction" << endl;
+	cout << "(Optional)9. Matrices division" << endl;
 }
 
 /// <summary>
