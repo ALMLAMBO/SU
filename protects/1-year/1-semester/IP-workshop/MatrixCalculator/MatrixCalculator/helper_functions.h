@@ -52,4 +52,8 @@ double** get_matrix_values(std::ifstream& file,
 MatrixRepresentation get_matrix(const char * filename);
 double get_scalar(const char * filename);
 
+int get_element_length(double number);
+MatrixElementsLength get_matrix_elements_lengths(
+	MatrixRepresentation matrix);
+
 #endif // !__HELPER_FUNCTIONS__
