@@ -134,10 +134,11 @@ double** get_matrix_values(std::ifstream& file,
 		char* line_content = new char[(unsigned int)line_length];
 		file.getline(line_content, line_length);
 		int column = 0;
+		int CYCLE_ITERATIONS = line_length / 2;
 
-		for (int i = 0; i < line_length; i++) {
+		for (int j = 0; i < CYCLE_ITERATIONS; j++) {
 			char* number_as_string = new char[MAX_NUMBER_LENGTH];
-			char symbol = line_content[i];
+			char symbol = line_content[j];
 
 			int number_length = 0;
 			while (symbol != (char)32) {
@@ -145,17 +146,33 @@ double** get_matrix_values(std::ifstream& file,
 					|| symbol == '.') {
 
 					number_as_string[number_length++] = symbol;
-					symbol = line_content[++i];
+					symbol = line_content[++j];
+				}
+				else if (symbol == '\0') {
+					break;
+				}
+				else {
+					break;
 				}
 			}
 
-			number_as_string[number_length] = '\0';
-			double number = stof(number_as_string);
-			matrix_values[i][column++] = number;
+			if (number_length != 0) {
+				number_as_string[number_length] = '\0';
+				double number = stof(number_as_string);
+				matrix_values[i][column] = number;
+				column++;
+			}
 
 			delete[] number_as_string;
 			number_as_string = NULL;
+
+			if (j > CYCLE_ITERATIONS) {
+				break;
+			}
 		}
+
+		delete[] line_content;
+		line_content = NULL;
 	}
 
 	return matrix_values;
