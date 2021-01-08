@@ -46,7 +46,8 @@ struct MatrixRepresentation {
 			dimensions_(dimensions), values_(NULL) { }
 
 		void set_dimensions(MatrixDimensions& dimensions) {
-			dimensions_ = dimensions;
+			dimensions_.set_rows(dimensions.get_rows());
+			dimensions_.set_columns(dimensions.get_columns());
 		}
 
 		MatrixDimensions get_dimensions() const {
@@ -54,8 +55,6 @@ struct MatrixRepresentation {
 		}
 
 		void set_values(double ** values) {
-
-
 			const int ROWS = dimensions_.get_rows();
 			const int COLUMNS = dimensions_.get_columns();
 
