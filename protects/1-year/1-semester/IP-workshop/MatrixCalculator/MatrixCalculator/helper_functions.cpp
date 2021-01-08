@@ -197,6 +197,7 @@ MatrixRepresentation get_matrix(const char * filename) {
 		matrix.set_values(values);
 
 		print_matrix(matrix);
+		file.close();
 	}
 
 	return matrix;
@@ -207,15 +208,30 @@ double get_scalar(const char * filename) {
 	double scalar = 0;
 	
 	if (file.is_open()) {
-		file.seekg(0, ios_base::end);
-		streamoff scalar_length = file.tellg();
+		const int MAX_SCALAR_LENGTH = 320;
+		char* scalar_as_string = new char[MAX_SCALAR_LENGTH];
+		file.seekg(-1, ios_base::end);
 
-		char* scalar_as_string = new char[(unsigned int)scalar_length];
-		file.getline(scalar_as_string, scalar_length);
+		while (true) {
+			char symbol;
+			file.get(symbol);
 
-		double scalar = stof(scalar_as_string);
-		delete[] scalar_as_string;
-		scalar_as_string = NULL;
+			if (file.tellg() <= 1) {
+				file.seekg(0);
+				break;
+			}
+			else if (symbol == '\n') {
+				break;
+			}
+			else {
+				file.seekg(-2, ios_base::cur);
+			}
+		}
+		
+		file.getline(scalar_as_string, MAX_SCALAR_LENGTH);
+		scalar = stof(scalar_as_string);
+
+		file.close();
 	}
 
 	return scalar;
