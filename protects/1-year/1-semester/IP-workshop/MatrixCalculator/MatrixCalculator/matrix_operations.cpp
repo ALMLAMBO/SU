@@ -118,6 +118,7 @@ MatrixRepresentation matrix_multiplication_with_number(
 		}
 	}
 
+	result_matrix.init_empty_matrix_values();
 	result_matrix.set_values(result_matrix_values);
 
 	for (int i = 0; i < ROWS; i++) {
