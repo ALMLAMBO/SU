@@ -124,11 +124,14 @@ double** get_matrix_values(std::ifstream& file,
 	const int MAX_NUMBER_LENGTH = 320;
 
 	double** matrix_values = new double* [ROWS];
+	
 	for (int i = 0; i < ROWS; i++) {
 		matrix_values[i] = new double[COLUMNS];
+	}
 
-		int line_length = file.tellg();
-		char* line_content = new char[line_length];
+	for (int i = 0; i < ROWS; i++) {
+		streamoff line_length = file.tellg() * 2;
+		char* line_content = new char[(unsigned int)line_length];
 		file.getline(line_content, line_length);
 		int column = 0;
 
@@ -142,6 +145,7 @@ double** get_matrix_values(std::ifstream& file,
 					|| symbol == '.') {
 
 					number_as_string[number_length++] = symbol;
+					symbol = line_content[++i];
 				}
 			}
 
@@ -187,9 +191,9 @@ double get_scalar(const char * filename) {
 	
 	if (file.is_open()) {
 		file.seekg(0, ios_base::end);
-		int scalar_length = file.tellg();
+		streamoff scalar_length = file.tellg();
 
-		char* scalar_as_string = new char[scalar_length];
+		char* scalar_as_string = new char[(unsigned int)scalar_length];
 		file.getline(scalar_as_string, scalar_length);
 
 		double scalar = stof(scalar_as_string);
