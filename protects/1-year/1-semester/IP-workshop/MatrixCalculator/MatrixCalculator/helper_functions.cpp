@@ -203,6 +203,11 @@ MatrixRepresentation get_matrix(const char * filename) {
 	return matrix;
 }
 
+/// <summary>
+/// Gets scalar for mult or divide matrix with number
+/// </summary>
+/// <param name="filename">File to get scalar from</param>
+/// <returns>scalar</returns>
 double get_scalar(const char * filename) {
 	ifstream file(filename);
 	double scalar = 0;
@@ -235,4 +240,44 @@ double get_scalar(const char * filename) {
 	}
 
 	return scalar;
+}
+
+/// <summary>
+/// Gets number length
+/// </summary>
+/// <param name="number">input number</param>
+/// <returns>number length</returns>
+int get_element_length(double number) {
+	const char* number_as_string = to_string(number).c_str();
+
+	return strlen(number_as_string);
+}
+
+
+MatrixElementsLength get_matrix_elements_lengths(
+	MatrixRepresentation matrix) {
+
+	const int ROWS = matrix.get_dimensions().get_rows();
+	const int COLUMNS = matrix.get_dimensions().get_columns();
+
+	MatrixElementsLength elements_lengths;
+	elements_lengths.init_elements_lengths();
+	const int ELEMENTS_COUNT = ROWS * COLUMNS;
+	int* elements_length = new int[ELEMENTS_COUNT];
+
+	elements_lengths.set_elements_count(ELEMENTS_COUNT);
+
+	int count = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLUMNS; j++) {
+			elements_length[count++] =
+				get_element_length(matrix.get_values()[i][j]);
+		}
+	}
+	elements_lengths.set_elements_lengths(elements_length);
+
+	delete[] elements_length;
+	elements_length = NULL;
+
+	return elements_lengths;
 }
