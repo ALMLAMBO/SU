@@ -14,6 +14,8 @@ void print_matrix_mult_divide_number(
 	MatrixRepresentation input_matrix,
 	MatrixRepresentation result_matrix,
 	char operation_symbol,
-	const char* message);
+	const char* message,
+	bool multiply,
+	double scalar);
 
 #endif // !__PRINT_FUNCTIONS__
