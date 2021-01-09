@@ -150,7 +150,13 @@
     <ClInclude Include="print_functions.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="matrix_det.txt" />
+    <Text Include="matrix_div_number.txt" />
+    <Text Include="matrix_inverse.txt" />
+    <Text Include="matrix_mult_first.txt" />
     <Text Include="matrix_mult_number.txt" />
+    <Text Include="matrix_mult_second.txt" />
+    <Text Include="matrix_transpose.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
