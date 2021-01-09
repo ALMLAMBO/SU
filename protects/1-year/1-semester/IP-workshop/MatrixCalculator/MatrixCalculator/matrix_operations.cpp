@@ -27,7 +27,6 @@ void matrix_operations_manager(int option) {
 					matrix_multiplication_with_number(
 						MATRIX_MULT_FILENAME);
 
-				cout << endl;
 				print_matrix(result_matrix);
 				result_matrix.destroy_matrix_values();
 			}
