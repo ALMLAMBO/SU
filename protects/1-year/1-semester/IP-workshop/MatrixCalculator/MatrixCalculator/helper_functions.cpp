@@ -4,6 +4,7 @@
 #include "helper_functions.h"
 #include "matrix_operations.h"
 #include "print_functions.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -260,6 +261,10 @@ int get_element_length(double number) {
 		whole_part /= 10;
 	}
 
+	if (decimal_part != 0) {
+		length++;
+	}
+
 	double temp_number;
 	int temp_whole_part;
 	while (decimal_part != 0) {
@@ -270,6 +275,7 @@ int get_element_length(double number) {
 		}
 
 		decimal_part = temp_number - temp_whole_part;
+		length++;
 	}
 
 	return length;
@@ -303,6 +309,43 @@ MatrixElementsLength get_matrix_elements_lengths(
 
 	delete[] elements_length;
 	elements_length = NULL;
+
+	return elements_lengths;
+}
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="matrix_elements_lengths"></param>
+/// <param name="columns"></param>
+/// <returns></returns>
+LongestElementsLengths get_columns_longest_elements(
+	MatrixElementsLength matrix_elements_lengths,
+	int columns) {
+
+	int* longest_elements_lengths = new int[columns];
+	LongestElementsLengths elements_lengths;
+	elements_lengths.set_elements_count(columns);
+	elements_lengths.init_elements_lengths();
+
+	for (int i = 0; i < columns; i++) {
+		int* column_begin = matrix_elements_lengths
+			.get_elements_lengths() + i * columns;
+
+		int* column_end = matrix_elements_lengths
+			.get_elements_lengths() + ((i + 1) * columns);
+
+		int longest_number = *max_element(
+			column_begin, column_end);
+
+		longest_elements_lengths[i] = longest_number;
+	}
+
+	elements_lengths.set_elements_lengths(
+		longest_elements_lengths);
+
+	delete[] longest_elements_lengths;
+	longest_elements_lengths = NULL;
 
 	return elements_lengths;
 }
