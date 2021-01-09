@@ -27,7 +27,6 @@ void matrix_operations_manager(int option) {
 					matrix_multiplication_with_number(
 						MATRIX_MULT_FILENAME);
 
-				print_matrix(result_matrix);
 				result_matrix.destroy_matrix_values();
 			}
 			break;
@@ -42,8 +41,6 @@ void matrix_operations_manager(int option) {
 			MatrixRepresentation result_matrix =
 				matrices_multiplication(first_matrix, second_matrix);
 
-			print_matrix(result_matrix);
-
 			break;
 		}
 
@@ -54,7 +51,7 @@ void matrix_operations_manager(int option) {
 			double determinant = calculate_matrix_determinant(
 				matrix_to_find_det);
 
-			cout << " = " << determinant << endl;
+			break;
 		}
 
 		case 4: {
@@ -64,6 +61,9 @@ void matrix_operations_manager(int option) {
 			double scalar = get_scalar(MATRIX_DIVISION_NUMBER);
 			MatrixRepresentation result_matrix_div_number =
 				matrix_division_with_number(matrix_div_number, scalar);
+			
+			result_matrix_div_number.destroy_matrix_values();
+			break;
 		}
 
 		case 5: {
@@ -73,8 +73,7 @@ void matrix_operations_manager(int option) {
 			MatrixRepresentation inverse_matrix =
 				find_matrix_inverse(input_matrix_inverse);
 
-			cout << endl;
-			print_matrix(inverse_matrix);
+			break;
 		}
 
 		case 6: {
@@ -84,8 +83,7 @@ void matrix_operations_manager(int option) {
 			MatrixRepresentation transpose =
 				matrix_transposition(input_transpose);
 
-			cout << endl;
-			print_matrix(transpose);
+			break;
 		}
 
 		default:
@@ -126,6 +124,10 @@ MatrixRepresentation matrix_multiplication_with_number(
 
 	delete[] result_matrix_values;
 	result_matrix_values = NULL;
+
+	print_matrix_mult_divide_number(
+		matrix, result_matrix, '*',
+		NULL, true, scalar);
 
 	return result_matrix;
 }
@@ -320,6 +322,10 @@ MatrixRepresentation matrix_division_with_number(
 	else {
 		return result_matrix;
 	}
+
+	print_matrix_mult_divide_number(
+		matrix, result_matrix, '/',
+		NULL, false, scalar);
 
 	return result_matrix;
 }
