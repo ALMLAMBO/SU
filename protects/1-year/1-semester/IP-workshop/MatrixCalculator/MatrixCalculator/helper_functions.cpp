@@ -248,12 +248,39 @@ double get_scalar(const char * filename) {
 /// <param name="number">input number</param>
 /// <returns>number length</returns>
 int get_element_length(double number) {
-	const char* number_as_string = to_string(number).c_str();
+	int whole_part = (int)number;
+	if (whole_part > number) {
+		whole_part--;
+	}
 
-	return strlen(number_as_string);
+	double decimal_part = number - whole_part;
+	int length = 0;
+
+	while (whole_part > 0) {
+		length++;
+		whole_part /= 10;
+	}
+
+	double temp_number;
+	int temp_whole_part;
+	while (decimal_part != 0) {
+		temp_number = decimal_part * 10;
+		temp_whole_part = (int)temp_number;
+		if (temp_whole_part > temp_number) {
+			temp_whole_part--;
+		}
+
+		decimal_part = temp_number - temp_whole_part;
+	}
+
+	return length;
 }
 
-
+/// <summary>
+/// Get length of every matrix element
+/// </summary>
+/// <param name="matrix">input matrix</param>
+/// <returns>matrix elements lengths with elements count</returns>
 MatrixElementsLength get_matrix_elements_lengths(
 	MatrixRepresentation matrix) {
 
@@ -261,17 +288,16 @@ MatrixElementsLength get_matrix_elements_lengths(
 	const int COLUMNS = matrix.get_dimensions().get_columns();
 
 	MatrixElementsLength elements_lengths;
-	elements_lengths.init_elements_lengths();
 	const int ELEMENTS_COUNT = ROWS * COLUMNS;
-	int* elements_length = new int[ELEMENTS_COUNT];
-
 	elements_lengths.set_elements_count(ELEMENTS_COUNT);
+	elements_lengths.init_elements_lengths();
+	int* elements_length = new int[ELEMENTS_COUNT];
 
 	int count = 0;
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLUMNS; j++) {
 			elements_length[count++] =
-				get_element_length(matrix.get_values()[i][j]);
+				get_element_length(matrix.get_values()[j][i]);
 		}
 	}
 	elements_lengths.set_elements_lengths(elements_length);
