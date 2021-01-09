@@ -1,6 +1,9 @@
 #include <iostream>
+#include <algorithm>
+#include <iomanip>
 #include "print_functions.h"
 #include "matrix_operations.h"
+#include "helper_functions.h"
 
 using namespace std;
 
@@ -24,16 +27,44 @@ void print_available_operations() {
 /// </summary>
 /// <param name="matrix">matrix to print</param>
 void print_matrix(MatrixRepresentation& matrix) {
-	const int ROWS = matrix.get_dimensions().get_rows();
-	const int COLUMNS = matrix.get_dimensions().get_columns();
+	if (matrix.get_values() != NULL) {
+		const int ROWS = matrix.get_dimensions().get_rows();
+		const int COLUMNS = matrix.get_dimensions().get_columns();
+		const char BEGIN_END_ROW = (char)186;
+		MatrixElementsLength elements_lengths =
+			get_matrix_elements_lengths(matrix);
+		
+		int* longest_numbers = new int[COLUMNS];
 
-	for (int i = 0; i < ROWS; i++) {
-		cout << (char)186;
+		for (int i = 0; i < ROWS; i++) {
+			int* column_begin = elements_lengths
+				.get_elements_lengths() + i * COLUMNS;
 
-		for (int j = 0; j < COLUMNS; j++) {
-			cout << " " << matrix.get_values()[i][j];
+			int* column_end = elements_lengths
+				.get_elements_lengths() + ((i + 1) * COLUMNS);
+
+			int longest_number = *max_element(
+				column_begin, column_end);
+
+			longest_numbers[i] = longest_number;
 		}
 
-		cout << (char)186 << endl;
+		for (int i = 0; i < ROWS; i++) {
+			cout << BEGIN_END_ROW;
+
+			for (int j = 0; j < COLUMNS; j++) {
+				cout << setw(longest_numbers[j])
+					<< matrix.get_values()[i][j];
+
+				if (j != COLUMNS - 1) {
+					cout << " ";
+				}
+			}
+
+			cout << BEGIN_END_ROW << endl;
+		}
+	}
+	else {
+		cout << "NaN" << endl;
 	}
 }
