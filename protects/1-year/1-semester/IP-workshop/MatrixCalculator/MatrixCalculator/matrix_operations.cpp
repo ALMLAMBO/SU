@@ -169,10 +169,15 @@ MatrixRepresentation matrices_multiplication(
 
 		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
 			for (int j = 0; j < COLUMNS_SECOND_MATRIX; j++) {
-				for (int k = 0; k < COLUMNS_FIRST_MATRIX; i++) {
-					result_matrix_values[i][j] +=
-						first_matrix.get_values()[i][k] *
+				for (int k = 0; k < COLUMNS_FIRST_MATRIX; k++) {
+					int number_from_first_matrix = 
+						first_matrix.get_values()[i][k];
+					
+					int number_from_second_matrix = 
 						second_matrix.get_values()[k][j];
+
+					result_matrix_values[i][j] += 
+						number_from_first_matrix * number_from_second_matrix;
 				}
 			}
 		}
