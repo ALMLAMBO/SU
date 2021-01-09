@@ -23,48 +23,119 @@ void print_available_operations() {
 }
 
 /// <summary>
-/// Prints matrix
+/// Prints matrices after operations with two matrices
 /// </summary>
-/// <param name="matrix">matrix to print</param>
-void print_matrix(MatrixRepresentation& matrix) {
-	if (matrix.get_values() != NULL) {
-		const int ROWS = matrix.get_dimensions().get_rows();
-		const int COLUMNS = matrix.get_dimensions().get_columns();
-		const char BEGIN_END_ROW = (char)186;
-		MatrixElementsLength elements_lengths =
-			get_matrix_elements_lengths(matrix);
-		
-		int* longest_numbers = new int[COLUMNS];
+/// <param name="first_input_matrix">left matrix</param>
+/// <param name="second_input_matrix">right matrix</param>
+/// <param name="result_matrix">matrix after operation</param>
+/// <param name="operation_symbol">symbol for add, substract, multiply and divide</param>
+void print_matrices_operations(
+	MatrixRepresentation first_input_matrix,
+	MatrixRepresentation second_input_matrix,
+	MatrixRepresentation result_matrix,
+	char operation_symbol) {
 
-		for (int i = 0; i < ROWS; i++) {
-			int* column_begin = elements_lengths
-				.get_elements_lengths() + i * COLUMNS;
+	
+}
 
-			int* column_end = elements_lengths
-				.get_elements_lengths() + ((i + 1) * COLUMNS);
+void print_matrix_mult_divide_number(
+	MatrixRepresentation input_matrix,
+	MatrixRepresentation result_matrix,
+	char operation_symbol,
+	const char* message,
+	bool multiply,
+	double scalar) {
 
-			int longest_number = *max_element(
-				column_begin, column_end);
+	MatrixElementsLength input_matrix_elements_lengths =
+		get_matrix_elements_lengths(input_matrix);
 
-			longest_numbers[i] = longest_number;
-		}
+	MatrixElementsLength result_matrix_elements_lengths =
+		get_matrix_elements_lengths(result_matrix);
 
-		for (int i = 0; i < ROWS; i++) {
-			cout << BEGIN_END_ROW;
+	const char* EMPTY_STRING = "   ";
+	const char BEGIN_END_ROW_SYMBOL = (char)186;
+	const int ROWS_INPUT_MATRIX = input_matrix
+		.get_dimensions().get_rows();
 
-			for (int j = 0; j < COLUMNS; j++) {
-				cout << setw(longest_numbers[j])
-					<< matrix.get_values()[i][j];
+	const int COLUMNS_INPUT_MATRIX = input_matrix
+		.get_dimensions().get_columns();
 
-				if (j != COLUMNS - 1) {
-					cout << " ";
-				}
+	LongestElementsLengths input_matrix_longest_elements_lengths =
+		get_columns_longest_elements(
+			input_matrix_elements_lengths,
+			COLUMNS_INPUT_MATRIX);
+
+	LongestElementsLengths result_matrix_longest_elements_lengths =
+		get_columns_longest_elements(
+			result_matrix_elements_lengths,
+			COLUMNS_INPUT_MATRIX);
+
+	int row_to_print_text_symbol_scalar = ROWS_INPUT_MATRIX / 2;
+	int scalar_length = get_element_length(scalar);
+
+	for (int i = 0; i < ROWS_INPUT_MATRIX; i++) {
+		if (i == row_to_print_text_symbol_scalar) {
+			if (message != NULL) {
+				cout << message << " ";
 			}
-
-			cout << BEGIN_END_ROW << endl;
+			else if (multiply) {
+				cout << scalar << " "
+					<< operation_symbol << " ";
+			}
 		}
-	}
-	else {
-		cout << "NaN" << endl;
+		else if(multiply) {
+			for (int k = 0; k < scalar_length + 3; k++) {
+				cout << " ";
+			}
+		}
+		
+		cout << BEGIN_END_ROW_SYMBOL;
+
+		for (int j = 0; j < COLUMNS_INPUT_MATRIX; j++) {
+			int column_longest_number =
+				input_matrix_longest_elements_lengths
+					.get_elements_lengths()[j];
+
+			cout << setw(column_longest_number)
+				<< input_matrix.get_values()[i][j];
+
+			if (j != COLUMNS_INPUT_MATRIX - 1) {
+				cout << " ";
+			}
+		}
+
+		cout << BEGIN_END_ROW_SYMBOL;
+		if (i == row_to_print_text_symbol_scalar) {
+			if (!multiply) {
+				cout << " " << operation_symbol << " "
+					<< scalar << " = ";
+			}
+			else {
+				cout << " = ";
+			}
+		}
+		else if (!multiply) {
+			for (int k = 0; k < scalar_length + 6; k++) {
+				cout << " ";
+			}
+		}
+		else {
+			cout << EMPTY_STRING;
+		}
+		
+		cout << BEGIN_END_ROW_SYMBOL;
+		for (int j = 0; j < COLUMNS_INPUT_MATRIX; j++) {
+			int column_longest_number =
+				result_matrix_longest_elements_lengths
+				.get_elements_lengths()[j];
+
+			cout << setw(column_longest_number)
+				<< result_matrix.get_values()[i][j];
+
+			if (j != COLUMNS_INPUT_MATRIX - 1) {
+				cout << " ";
+			}
+		}
+		cout << BEGIN_END_ROW_SYMBOL << endl;
 	}
 }
