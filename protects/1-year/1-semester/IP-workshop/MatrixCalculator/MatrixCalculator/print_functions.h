@@ -20,7 +20,7 @@ void print_matrix_mult_divide_number(
 void print_matrix_det(MatrixRepresentation matrix,
 	double determinant, bool determinant_exists);
 
-void print_matrix_invers(
+void print_matrix_inverse(
 	MatrixRepresentation input_matrix,
 	MatrixRepresentation inverse_matrix);
 
