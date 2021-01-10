@@ -152,7 +152,7 @@ MatrixRepresentation matrices_multiplication(
 		.get_dimensions().get_rows();
 
 	const int COLUMNS_SECOND_MATRIX = second_matrix
-		.get_dimensions().get_rows();
+		.get_dimensions().get_columns();
 
 	MatrixDimensions result_matrix_dimensions;
 	result_matrix_dimensions.set_rows(ROWS_FIRST_MATRIX);
@@ -176,13 +176,23 @@ MatrixRepresentation matrices_multiplication(
 					double number_from_second_matrix = 
 						second_matrix.get_values()[k][j];
 
-					result_matrix_values[i][j] += 
-						number_from_first_matrix * number_from_second_matrix;
+					double mult = number_from_first_matrix *
+						number_from_second_matrix;
+
+					result_matrix_values[i][j] += mult;
 				}
 			}
 		}
 
 		result_matrix.set_values(result_matrix_values);
+
+		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
+			for (int j = 0; j < COLUMNS_SECOND_MATRIX; j++) {
+				cout << result_matrix_values[i][j] << " -> "
+					<< result_matrix.get_values()[i][j] << " ";
+			}
+			cout << endl;
+		}
 
 		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
 			delete[] result_matrix_values[i];
@@ -194,6 +204,10 @@ MatrixRepresentation matrices_multiplication(
 	else {
 		return result_matrix;
 	}
+
+	print_matrices_operations(
+		first_matrix, second_matrix,
+		result_matrix, '*');
 
 	return result_matrix;
 }
@@ -213,7 +227,8 @@ double calculate_matrix_determinant(
 		.get_dimensions().get_columns();
 
 	double determinant = DBL_MIN;
-
+	bool determinant_exists = false;
+	
 	if (ROWS == COLUMNS) {
 		double main_diagonals_sum = 0;
 		double secondary_diagonals_sum = 0;
@@ -258,11 +273,10 @@ double calculate_matrix_determinant(
 		}
 
 		determinant = main_diagonals_sum - secondary_diagonals_sum;
+		determinant_exists = true;
 	}
 
-	MatrixDimensions dimensions = matrix.get_dimensions();
-	MatrixRepresentation empty_matrix(dimensions);
-	print_matrix_det(matrix, determinant);
+	print_matrix_det(matrix, determinant, determinant_exists);
 
 	return determinant;
 }
@@ -397,6 +411,7 @@ MatrixRepresentation find_matrix_inverse(
 	else {
 		return inverse_matrix;
 	}
+	print_matrix_inverse(matrix, inverse_matrix);
 
 	return inverse_matrix;
 }
@@ -416,26 +431,30 @@ MatrixRepresentation matrix_transposition(
 	result_matrix_dimensions.set_rows(COLUMNS);
 	result_matrix_dimensions.set_columns(ROWS);
 	MatrixRepresentation result_matrix(result_matrix_dimensions);
+	result_matrix.init_empty_matrix_values();
 
-	double** result_matrix_values = new double* [ROWS];
+	double** result_matrix_values = new double* [COLUMNS];
 
-	for (int i = 0; i < ROWS; i++) {
-		result_matrix_values[i] = new double[COLUMNS];
+	for (int i = 0; i < COLUMNS; i++) {
+		result_matrix_values[i] = new double[ROWS];
+	}
 
-		for (int j = 0; j < COLUMNS; j++) {
-			result_matrix_values[i][j] = matrix
-				.get_values()[j][i];
+	for (int i = 0; i < COLUMNS; i++) {
+		for (int j = 0; j < ROWS; j++) {
+			result_matrix_values[i][j] = 
+				matrix.get_values()[j][i];
 		}
 	}
 
 	result_matrix.set_values(result_matrix_values);
 
-	for (int i = 0; i < ROWS; i++) {
+	for (int i = 0; i < COLUMNS; i++) {
 		delete[] result_matrix_values[i];
 	}
 
 	delete[] result_matrix_values;
 	result_matrix_values = NULL;
 
+	print_matrix_transpose(matrix, result_matrix);
 	return result_matrix;
 }

@@ -112,6 +112,9 @@ MatrixDimensions get_matrix_dimensions(std::ifstream& file) {
 		else {
 			dimensions.set_columns(dimension);
 		}
+
+		delete[] dimension_as_string;
+		dimension_as_string = NULL;
 	}
 
 	return dimensions;
@@ -198,6 +201,13 @@ MatrixRepresentation get_matrix(const char * filename) {
 		matrix.set_values(values);
 
 		file.close();
+		
+		for (int i = 0; i < dimensions.get_rows(); i++) {
+			delete[] values[i];
+		}
+
+		delete[] values;
+		values = NULL;
 	}
 
 	return matrix;
@@ -235,6 +245,9 @@ double get_scalar(const char * filename) {
 		
 		file.getline(scalar_as_string, MAX_SCALAR_LENGTH);
 		scalar = stof(scalar_as_string);
+
+		delete[] scalar_as_string;
+		scalar_as_string = NULL;
 
 		file.close();
 	}
