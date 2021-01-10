@@ -32,7 +32,7 @@ void print_matrices_operations(
 	MatrixRepresentation result_matrix,
 	char operation_symbol) {
 
-	const char* EMPTY_STRING = "   ";
+	const char* EMPTY_STRING = "    ";
 	const char BEGIN_END_ROW_SYMBOL = (char)186;
 	const int ROWS_FIRST_INPUT_MATRIX = first_input_matrix
 		.get_dimensions().get_rows();
@@ -144,7 +144,12 @@ void print_matrices_operations(
 
 			cout << setw(column_longest_number)
 				<< result_matrix.get_values()[i][j];
+
+			if (j != COLUMNS_SECOND_INPUT_MATRIX - 1) {
+				cout << " ";
+			}
 		}
+		cout << BEGIN_END_ROW_SYMBOL << endl;
 	}
 }
 
