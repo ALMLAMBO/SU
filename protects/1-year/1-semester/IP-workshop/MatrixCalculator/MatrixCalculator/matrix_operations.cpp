@@ -127,7 +127,7 @@ MatrixRepresentation matrix_multiplication_with_number(
 
 	print_matrix_mult_divide_number(
 		matrix, result_matrix, '*',
-		NULL, true, scalar);
+		true, scalar);
 
 	return result_matrix;
 }
@@ -170,10 +170,10 @@ MatrixRepresentation matrices_multiplication(
 		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
 			for (int j = 0; j < COLUMNS_SECOND_MATRIX; j++) {
 				for (int k = 0; k < COLUMNS_FIRST_MATRIX; k++) {
-					int number_from_first_matrix = 
+					double number_from_first_matrix = 
 						first_matrix.get_values()[i][k];
 					
-					int number_from_second_matrix = 
+					double number_from_second_matrix = 
 						second_matrix.get_values()[k][j];
 
 					result_matrix_values[i][j] += 
@@ -282,6 +282,10 @@ double calculate_matrix_determinant(
 		determinant = main_diagonals_sum - secondary_diagonals_sum;
 	}
 
+	MatrixDimensions dimensions = matrix.get_dimensions();
+	MatrixRepresentation empty_matrix(dimensions);
+	print_matrix_det(matrix, determinant);
+
 	return determinant;
 }
 
@@ -330,7 +334,7 @@ MatrixRepresentation matrix_division_with_number(
 
 	print_matrix_mult_divide_number(
 		matrix, result_matrix, '/',
-		NULL, false, scalar);
+		false, scalar);
 
 	return result_matrix;
 }
