@@ -265,6 +265,10 @@ int get_element_length(double number) {
 		length++;
 	}
 
+	if (number < 0) {
+		length++;
+	}
+
 	double temp_number;
 	int temp_whole_part;
 	while (decimal_part != 0) {
@@ -293,22 +297,27 @@ MatrixElementsLength get_matrix_elements_lengths(
 	const int COLUMNS = matrix.get_dimensions().get_columns();
 
 	MatrixElementsLength elements_lengths;
-	const int ELEMENTS_COUNT = ROWS * COLUMNS;
-	elements_lengths.set_elements_count(ELEMENTS_COUNT);
-	elements_lengths.init_elements_lengths();
-	int* elements_length = new int[ELEMENTS_COUNT];
+	if (matrix.get_values() != NULL) {
+		const int ELEMENTS_COUNT = ROWS * COLUMNS;
+		elements_lengths.set_elements_count(ELEMENTS_COUNT);
+		elements_lengths.init_elements_lengths();
+		int* elements_length = new int[ELEMENTS_COUNT];
 
-	int count = 0;
-	for (int i = 0; i < ROWS; i++) {
-		for (int j = 0; j < COLUMNS; j++) {
-			elements_length[count++] =
-				get_element_length(matrix.get_values()[j][i]);
+		int count = 0;
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLUMNS; j++) {
+				elements_length[count++] =
+					get_element_length(matrix.get_values()[j][i]);
+			}
 		}
-	}
-	elements_lengths.set_elements_lengths(elements_length);
+		elements_lengths.set_elements_lengths(elements_length);
 
-	delete[] elements_length;
-	elements_length = NULL;
+		delete[] elements_length;
+		elements_length = NULL;
+	}
+	else {
+		return elements_lengths;
+	}
 
 	return elements_lengths;
 }
@@ -323,29 +332,33 @@ LongestElementsLengths get_columns_longest_elements(
 	MatrixElementsLength matrix_elements_lengths,
 	int columns) {
 
-	int* longest_elements_lengths = new int[columns];
 	LongestElementsLengths elements_lengths;
-	elements_lengths.set_elements_count(columns);
-	elements_lengths.init_elements_lengths();
+	if (matrix_elements_lengths
+		.get_elements_lengths() != NULL) {
+		
+		int* longest_elements_lengths = new int[columns];
+		elements_lengths.set_elements_count(columns);
+		elements_lengths.init_elements_lengths();
 
-	for (int i = 0; i < columns; i++) {
-		int* column_begin = matrix_elements_lengths
-			.get_elements_lengths() + i * columns;
+		for (int i = 0; i < columns; i++) {
+			int* column_begin = matrix_elements_lengths
+				.get_elements_lengths() + i * columns;
 
-		int* column_end = matrix_elements_lengths
-			.get_elements_lengths() + ((i + 1) * columns);
+			int* column_end = matrix_elements_lengths
+				.get_elements_lengths() + ((i + 1) * columns);
 
-		int longest_number = *max_element(
-			column_begin, column_end);
+			int longest_number = *max_element(
+				column_begin, column_end);
 
-		longest_elements_lengths[i] = longest_number;
+			longest_elements_lengths[i] = longest_number;
+		}
+
+		elements_lengths.set_elements_lengths(
+			longest_elements_lengths);
+
+		delete[] longest_elements_lengths;
+		longest_elements_lengths = NULL;
 	}
-
-	elements_lengths.set_elements_lengths(
-		longest_elements_lengths);
-
-	delete[] longest_elements_lengths;
-	longest_elements_lengths = NULL;
 
 	return elements_lengths;
 }
