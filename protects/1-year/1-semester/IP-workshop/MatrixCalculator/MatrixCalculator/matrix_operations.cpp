@@ -239,44 +239,19 @@ double calculate_matrix_determinant(
 
 		int middle_column = COLUMNS - 1;
 
-		for (int i = 0; i < ROWS; i++) {
-			main_diagonal_mult *=
-				extended_matrix_values[i][i + middle_column];
-
-			secondary_diagonal_mult *=
-				extended_matrix_values[i][middle_column - i];
-		}
-
-		main_diagonals_sum += main_diagonal_mult;
-		secondary_diagonals_sum += secondary_diagonal_mult;
-		main_diagonal_mult = 1;
-		secondary_diagonal_mult = 1;
-
-		int rows_between_first_last = ROWS - 2;
-
-		for (int k = 1; k <= rows_between_first_last; k++) {
+		for (int k = 0; k < COLUMNS; k++) {
 			for (int i = 0; i < ROWS; i++) {
-				int second_index = middle_column + k;
+				int a = extended_matrix_values[i][middle_column - k + i];
+				int b = extended_matrix_values[i][middle_column + k - i];
 
-				main_diagonal_mult *=
-					extended_matrix_values[i][second_index];
-
-				secondary_diagonal_mult *=
-					extended_matrix_values[i][second_index - i];
+				main_diagonal_mult *= a;
+				secondary_diagonal_mult *= b;
 			}
 
 			main_diagonals_sum += main_diagonal_mult;
 			secondary_diagonals_sum += secondary_diagonal_mult;
 			main_diagonal_mult = 1;
 			secondary_diagonal_mult = 1;
-		}
-
-		for (int i = 0; i < COLUMNS; i++) {
-			main_diagonal_mult *=
-				extended_matrix_values[i][i];
-
-			secondary_diagonal_mult *=
-				extended_matrix_values[i][extended_matrix_columns - i];
 		}
 
 		determinant = main_diagonals_sum - secondary_diagonals_sum;
