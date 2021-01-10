@@ -241,11 +241,14 @@ double calculate_matrix_determinant(
 
 		for (int k = 0; k < COLUMNS; k++) {
 			for (int i = 0; i < ROWS; i++) {
-				int a = extended_matrix_values[i][middle_column - k + i];
-				int b = extended_matrix_values[i][middle_column + k - i];
+				int main_diagonal_element = 
+					extended_matrix_values[i][middle_column - k + i];
+				
+				int secondary_diagonal_element = 
+					extended_matrix_values[i][middle_column + k - i];
 
-				main_diagonal_mult *= a;
-				secondary_diagonal_mult *= b;
+				main_diagonal_mult *= main_diagonal_element;
+				secondary_diagonal_mult *= secondary_diagonal_element;
 			}
 
 			main_diagonals_sum += main_diagonal_mult;
