@@ -54,18 +54,9 @@ struct MatrixRepresentation {
 			return dimensions_;
 		}
 
-		void set_values(double ** values, bool transpose) {
-			int ROWS = 0;
-			int COLUMNS = 0;
-			
-			if (transpose) {
-				ROWS = dimensions_.get_columns();
-				COLUMNS = dimensions_.get_rows();
-			}
-			else {
-				ROWS = dimensions_.get_rows();
-				COLUMNS = dimensions_.get_columns();
-			}
+		void set_values(double ** values) {
+			const int ROWS = dimensions_.get_rows();
+			const int COLUMNS = dimensions_.get_columns();
 
 			for (int i = 0; i < ROWS; i++) {
 				for (int j = 0; j < COLUMNS; j++) {
