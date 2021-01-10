@@ -42,7 +42,6 @@ void print_matrix_mult_divide_number(
 	MatrixRepresentation input_matrix,
 	MatrixRepresentation result_matrix,
 	char operation_symbol,
-	const char* message,
 	bool multiply,
 	double scalar) {
 
@@ -75,10 +74,7 @@ void print_matrix_mult_divide_number(
 
 	for (int i = 0; i < ROWS_INPUT_MATRIX; i++) {
 		if (i == row_to_print_text_symbol_scalar) {
-			if (message != NULL) {
-				cout << message << " ";
-			}
-			else if (multiply) {
+			if (multiply) {
 				cout << scalar << " "
 					<< operation_symbol << " ";
 			}
@@ -137,5 +133,138 @@ void print_matrix_mult_divide_number(
 			}
 		}
 		cout << BEGIN_END_ROW_SYMBOL << endl;
+	}
+}
+
+void print_matrix_det(MatrixRepresentation matrix,
+	double determinant) {
+
+	MatrixElementsLength matrix_elements_lengths =
+		get_matrix_elements_lengths(matrix);
+	
+	const char* message = "Determinant of ";
+	const char BEGIN_END_ROW_SYMBOL = (char)186;
+	const int ROWS_INPUT_MATRIX = matrix
+		.get_dimensions().get_rows();
+
+	const int COLUMNS_INPUT_MATRIX = matrix
+		.get_dimensions().get_columns();
+
+	LongestElementsLengths matrix_longest_elements_lengths =
+		get_columns_longest_elements(
+			matrix_elements_lengths,
+			COLUMNS_INPUT_MATRIX);
+
+	int row_to_print_det_value = ROWS_INPUT_MATRIX / 2;
+
+	for (int i = 0; i < ROWS_INPUT_MATRIX; i++) {
+		if (i == row_to_print_det_value) {
+			cout << message;
+		}
+		else {
+			for (int k = 0; k < strlen(message); k++) {
+				cout << " ";
+			}
+		}
+
+		cout << BEGIN_END_ROW_SYMBOL;
+		for (int j = 0; j < COLUMNS_INPUT_MATRIX; j++) {
+			int column_longest_number = matrix_longest_elements_lengths
+				.get_elements_lengths()[j];
+
+			cout << setw(column_longest_number)
+				<< matrix.get_values()[i][j];
+
+			if (j != COLUMNS_INPUT_MATRIX - 1) {
+				cout << " ";
+			}
+		}
+
+		cout << BEGIN_END_ROW_SYMBOL;
+		if (i == row_to_print_det_value) {
+			cout << " = " << determinant;
+		}
+		cout << endl;
+	}
+}
+
+void print_matrix_invers(
+	MatrixRepresentation input_matrix,
+	MatrixRepresentation inverse_matrix) {
+
+	MatrixElementsLength input_matrix_elements_lengths =
+		get_matrix_elements_lengths(input_matrix);
+
+	MatrixElementsLength inverse_matrix_elements_lengths =
+		get_matrix_elements_lengths(inverse_matrix);
+
+	const char* message = "Inverse of ";
+	const char* EMPTY_STRING = "   ";
+	const char BEGIN_END_ROW_SYMBOL = (char)186;
+	const int ROWS_INPUT_MATRIX = input_matrix
+		.get_dimensions().get_rows();
+
+	const int COLUMNS_INPUT_MATRIX = input_matrix
+		.get_dimensions().get_columns();
+
+	LongestElementsLengths input_matrix_longest_elements_lengths =
+		get_columns_longest_elements(
+			input_matrix_elements_lengths, COLUMNS_INPUT_MATRIX);
+
+	LongestElementsLengths inverse_matrix_longest_elements_lengths =
+		get_columns_longest_elements(
+			inverse_matrix_elements_lengths, COLUMNS_INPUT_MATRIX);
+
+	int row_to_print_message = ROWS_INPUT_MATRIX / 2;
+	bool inverse_matrix_exists = (inverse_matrix.get_values() == NULL);
+
+	for (int i = 0; i < ROWS_INPUT_MATRIX; i++) {
+		if (i == row_to_print_message) {
+			cout << message;
+		}
+		else {
+			for (int k = 0; k < strlen(message); k++) {
+				cout << " ";
+			}
+		}
+
+		cout << BEGIN_END_ROW_SYMBOL;
+		for (int j = 0; j < COLUMNS_INPUT_MATRIX; j++) {
+			int column_longest_number =
+				input_matrix_longest_elements_lengths
+					.get_elements_lengths()[j];
+
+			cout << setw(column_longest_number)
+				<< input_matrix.get_values()[i][j];
+
+			if (j != COLUMNS_INPUT_MATRIX - 1) {
+				cout << " ";
+			}
+		}
+		cout << BEGIN_END_ROW_SYMBOL;
+
+		if (i == row_to_print_message) {
+			cout << " = ";
+
+			if (!inverse_matrix_exists) {
+				cout << "NaN" << endl;
+			}
+		}
+		else {
+			cout << EMPTY_STRING;
+		}
+
+		if (inverse_matrix_exists) {
+			cout << BEGIN_END_ROW_SYMBOL;
+			for (int j = 0; j < COLUMNS_INPUT_MATRIX; j++) {
+				int inverse_matrix_column_longest_number =
+					inverse_matrix_longest_elements_lengths
+					.get_elements_lengths()[j];
+
+				cout << setw(inverse_matrix_column_longest_number) <<
+					inverse_matrix.get_values()[i][j];
+			}
+			cout << BEGIN_END_ROW_SYMBOL << endl;
+		}
 	}
 }
