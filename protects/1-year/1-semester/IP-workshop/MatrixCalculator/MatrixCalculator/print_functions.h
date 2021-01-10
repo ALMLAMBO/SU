@@ -18,7 +18,7 @@ void print_matrix_mult_divide_number(
 	double scalar);
 
 void print_matrix_det(MatrixRepresentation matrix,
-	double determinant);
+	double determinant, bool determinant_exists);
 
 void print_matrix_invers(
 	MatrixRepresentation input_matrix,
