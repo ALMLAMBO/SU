@@ -169,7 +169,7 @@ MatrixRepresentation matrices_multiplication(
 
 		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
 			for (int j = 0; j < COLUMNS_SECOND_MATRIX; j++) {
-				int sum_result_matrix_element = 0;
+				double sum_result_matrix_element = 0;
 				
 				for (int k = 0; k < COLUMNS_FIRST_MATRIX; k++) {
 					double number_from_first_matrix = 
@@ -231,6 +231,16 @@ double calculate_matrix_determinant(
 		double main_diagonal_mult = 1;
 		double secondary_diagonal_mult = 1;
 
+		if (ROWS == 2) {
+			determinant += matrix.get_values()[0][0] *
+				matrix.get_values()[1][1];
+
+			determinant -= matrix.get_values()[0][1] *
+				matrix.get_values()[1][0];
+
+			return determinant;
+		}
+
 		double** extended_matrix_values = new double* [ROWS];
 		int extended_matrix_columns = COLUMNS * 2 - 1;
 		for (int i = 0; i < ROWS; i++) {
@@ -273,6 +283,7 @@ double calculate_matrix_determinant(
 	}
 
 	print_matrix_det(matrix, determinant, determinant_exists);
+	cout << endl;
 
 	return determinant;
 }
@@ -353,39 +364,55 @@ MatrixRepresentation find_matrix_inverse(
 				matrix_values[i] = new double[COLUMNS];
 			}
 
-			const int SUB_MATRIX_ROWS = ROWS - 1;
-			const int SUB_MATRIX_COLUMNS = COLUMNS - 1;
+			double matrix_values_multiplier = 1 / determinant;
+			bool plus_sign = true;
+			const int SUB_MATRIX_SIZE = ROWS - 1;
 			MatrixDimensions sub_matrix_dimensions;
-
-			sub_matrix_dimensions.set_rows(SUB_MATRIX_ROWS);
-			sub_matrix_dimensions.set_columns(SUB_MATRIX_COLUMNS);
+			sub_matrix_dimensions.set_rows(SUB_MATRIX_SIZE);
+			sub_matrix_dimensions.set_columns(SUB_MATRIX_SIZE);
 
 			for (int i = 0; i < ROWS; i++) {
 				for (int j = 0; j < COLUMNS; j++) {
-					double** sub_matrix_values =
-						new double* [SUB_MATRIX_ROWS];
+					double** sub_matrix_values = new double* [SUB_MATRIX_SIZE];
 
-					for (int k = 0; i < SUB_MATRIX_ROWS; i++) {
-						sub_matrix_values[i] = 
-							new double[SUB_MATRIX_COLUMNS];
+					for (int k = 0; k < SUB_MATRIX_SIZE; k++) {
+						sub_matrix_values[k] = new double[SUB_MATRIX_SIZE];
+					}
 
-						for (int l = 0; i < SUB_MATRIX_COLUMNS; j++) {
+					int row = 0, col = 0;
+					for (int k = 0; k < ROWS; k++) {
+						for (int l = 0; l < COLUMNS; l++) {
 							if (k != i && l != j) {
-								sub_matrix_values[k][l] =
+								sub_matrix_values[row][col] =
 									matrix.get_values()[k][l];
+
+								col++;
+								if (col == SUB_MATRIX_SIZE) {
+									col = 0;
+									row++;
+								}
 							}
 						}
 					}
 
 					MatrixRepresentation sub_matrix(sub_matrix_dimensions);
+					sub_matrix.init_empty_matrix_values();
 					sub_matrix.set_values(sub_matrix_values);
 
-					double sub_determinant =
-						calculate_matrix_determinant(sub_matrix);
+					double sub_det = calculate_matrix_determinant(
+						sub_matrix) * matrix_values_multiplier;
 
-					matrix_values[j][i] = sub_determinant;
+					if (!plus_sign) {
+						sub_det = -sub_det;
+						plus_sign = true;
+					}
+					else {
+						plus_sign = false;
+					}
 
-					for (int k = 0; k < SUB_MATRIX_ROWS; k++) {
+					matrix_values[j][i] = sub_det;
+
+					for (int k = 0; k < SUB_MATRIX_SIZE; k++) {
 						delete[] sub_matrix_values[k];
 					}
 
@@ -394,6 +421,7 @@ MatrixRepresentation find_matrix_inverse(
 				}
 			}
 
+			inverse_matrix.init_empty_matrix_values();
 			inverse_matrix.set_values(matrix_values);
 			
 			for (int i = 0; i < ROWS; i++) {
