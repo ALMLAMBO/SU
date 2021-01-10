@@ -1,3 +1,18 @@
+/**
+*
+* Solution to course project # 6
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2020/2021
+*
+* @author Aleksander Marinov
+* @idnumber 62622
+* @compiler VC
+*
+* <file with print functions>
+*
+*/
+
 #include <iostream>
 #include <algorithm>
 #include <iomanip>
