@@ -169,6 +169,8 @@ MatrixRepresentation matrices_multiplication(
 
 		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
 			for (int j = 0; j < COLUMNS_SECOND_MATRIX; j++) {
+				int sum_result_matrix_element = 0;
+				
 				for (int k = 0; k < COLUMNS_FIRST_MATRIX; k++) {
 					double number_from_first_matrix = 
 						first_matrix.get_values()[i][k];
@@ -176,23 +178,17 @@ MatrixRepresentation matrices_multiplication(
 					double number_from_second_matrix = 
 						second_matrix.get_values()[k][j];
 
-					double mult = number_from_first_matrix *
-						number_from_second_matrix;
+					double mult_input_matrices_elements = 
+						number_from_first_matrix * number_from_second_matrix;
 
-					result_matrix_values[i][j] += mult;
+					sum_result_matrix_element += mult_input_matrices_elements;
 				}
+
+				result_matrix_values[i][j] = sum_result_matrix_element;
 			}
 		}
 
 		result_matrix.set_values(result_matrix_values);
-
-		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
-			for (int j = 0; j < COLUMNS_SECOND_MATRIX; j++) {
-				cout << result_matrix_values[i][j] << " -> "
-					<< result_matrix.get_values()[i][j] << " ";
-			}
-			cout << endl;
-		}
 
 		for (int i = 0; i < ROWS_FIRST_MATRIX; i++) {
 			delete[] result_matrix_values[i];
