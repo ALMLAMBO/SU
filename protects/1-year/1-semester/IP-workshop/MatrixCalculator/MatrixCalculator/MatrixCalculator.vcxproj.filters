@@ -49,5 +49,23 @@
     <Text Include="matrix_mult_number.txt">
       <Filter>Source Files\files</Filter>
     </Text>
+    <Text Include="matrix_mult_first.txt">
+      <Filter>Source Files\files</Filter>
+    </Text>
+    <Text Include="matrix_mult_second.txt">
+      <Filter>Source Files\files</Filter>
+    </Text>
+    <Text Include="matrix_det.txt">
+      <Filter>Source Files\files</Filter>
+    </Text>
+    <Text Include="matrix_div_number.txt">
+      <Filter>Source Files\files</Filter>
+    </Text>
+    <Text Include="matrix_inverse.txt">
+      <Filter>Source Files\files</Filter>
+    </Text>
+    <Text Include="matrix_transpose.txt">
+      <Filter>Source Files\files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
