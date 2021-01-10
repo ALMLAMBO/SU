@@ -195,7 +195,7 @@ MatrixRepresentation get_matrix(const char * filename) {
 		matrix.init_empty_matrix_values();
 
 		double** values = get_matrix_values(file, dimensions);
-		matrix.set_values(values, false);
+		matrix.set_values(values);
 
 		file.close();
 	}
