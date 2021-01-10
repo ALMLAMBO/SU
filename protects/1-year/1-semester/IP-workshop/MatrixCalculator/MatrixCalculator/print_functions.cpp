@@ -244,9 +244,6 @@ void print_matrix_mult_divide_number(
 		}
 		cout << BEGIN_END_ROW_SYMBOL << endl;
 	}
-
-	delete[] EMPTY_STRING;
-	EMPTY_STRING = NULL;
 	
 	input_matrix_elements_lengths.destroy_elements_lengths();
 	result_matrix_elements_lengths.destroy_elements_lengths();
@@ -312,9 +309,6 @@ void print_matrix_det(MatrixRepresentation matrix,
 		}
 		cout << endl;
 	}
-
-	delete[] message;
-	message = NULL;
 
 	matrix_elements_lengths.destroy_elements_lengths();
 	matrix_longest_elements_lengths
@@ -400,12 +394,6 @@ void print_matrix_inverse(
 			cout << BEGIN_END_ROW_SYMBOL << endl;
 		}
 	}
-
-	delete[] message;
-	message = NULL;
-	
-	delete[] EMPTY_STRING;
-	EMPTY_STRING = NULL;
 
 	input_matrix_elements_lengths
 		.destroy_elements_lengths();
@@ -504,12 +492,6 @@ void print_matrix_transpose(
 		}
 		cout << BEGIN_END_ROW_SYMBOL << endl;
 	}
-
-	delete[] message;
-	message = NULL;
-
-	delete[] EMPTY_STRING;
-	EMPTY_STRING = NULL;
 
 	matrix_elements_lengths
 		.destroy_elements_lengths();
