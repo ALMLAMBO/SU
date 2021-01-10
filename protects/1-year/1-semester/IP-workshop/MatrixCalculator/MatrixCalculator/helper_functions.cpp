@@ -195,7 +195,7 @@ MatrixRepresentation get_matrix(const char * filename) {
 		matrix.init_empty_matrix_values();
 
 		double** values = get_matrix_values(file, dimensions);
-		matrix.set_values(values);
+		matrix.set_values(values, false);
 
 		file.close();
 	}
@@ -304,8 +304,8 @@ MatrixElementsLength get_matrix_elements_lengths(
 		int* elements_length = new int[ELEMENTS_COUNT];
 
 		int count = 0;
-		for (int i = 0; i < ROWS; i++) {
-			for (int j = 0; j < COLUMNS; j++) {
+		for (int i = 0; i < COLUMNS; i++) {
+			for (int j = 0; j < ROWS; j++) {
 				elements_length[count++] =
 					get_element_length(matrix.get_values()[j][i]);
 			}
