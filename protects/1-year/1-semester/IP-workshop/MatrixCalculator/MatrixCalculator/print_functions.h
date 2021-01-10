@@ -24,4 +24,8 @@ void print_matrix_inverse(
 	MatrixRepresentation input_matrix,
 	MatrixRepresentation inverse_matrix);
 
+void print_matrix_transpose(
+	MatrixRepresentation matrix,
+	MatrixRepresentation result_matrix);
+
 #endif // !__PRINT_FUNCTIONS__
