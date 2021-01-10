@@ -14,8 +14,14 @@ void print_matrix_mult_divide_number(
 	MatrixRepresentation input_matrix,
 	MatrixRepresentation result_matrix,
 	char operation_symbol,
-	const char* message,
 	bool multiply,
 	double scalar);
+
+void print_matrix_det(MatrixRepresentation matrix,
+	double determinant);
+
+void print_matrix_invers(
+	MatrixRepresentation input_matrix,
+	MatrixRepresentation inverse_matrix);
 
 #endif // !__PRINT_FUNCTIONS__
