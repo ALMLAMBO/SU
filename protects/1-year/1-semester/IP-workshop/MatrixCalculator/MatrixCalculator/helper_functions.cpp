@@ -70,7 +70,7 @@ double calclulate_sqrt(double number) {
 /// <returns>result after power</returns>
 double pow_number(double number, int exponent) {
 	double powered_number = 1;
-	
+
 	if (exponent == 0) {
 		powered_number = 1;
 	}
@@ -95,11 +95,11 @@ double pow_number(double number, int exponent) {
 /// <returns>absolute value</returns>
 double absolute_value(double number) {
 	double result = 0;
-	
+
 	if (number < 0) {
 		result = -number;
 	}
-	
+
 	return result;
 }
 
@@ -110,16 +110,13 @@ double absolute_value(double number) {
 /// <returns>matrix dimensions structure with dimensions set</returns>
 MatrixDimensions get_matrix_dimensions(std::ifstream& file) {
 	MatrixDimensions dimensions;
-	const int MAX_DIMENSION_LENGTH = 12;
 	const int CYCLE_ITERATIONS = 2;
 	bool set_row = true;
 
+	int dimension;
 	for (int i = 0; i < CYCLE_ITERATIONS; i++) {
-		char* dimension_as_string = new char[MAX_DIMENSION_LENGTH];
-		file.getline(dimension_as_string, MAX_DIMENSION_LENGTH);
+		file >> dimension;
 
-		int dimension = stoi(dimension_as_string);
-		
 		if (set_row) {
 			dimensions.set_rows(dimension);
 			set_row = false;
@@ -127,9 +124,6 @@ MatrixDimensions get_matrix_dimensions(std::ifstream& file) {
 		else {
 			dimensions.set_columns(dimension);
 		}
-
-		delete[] dimension_as_string;
-		dimension_as_string = NULL;
 	}
 
 	return dimensions;
@@ -143,55 +137,18 @@ double** get_matrix_values(std::ifstream& file,
 	const int MAX_NUMBER_LENGTH = 320;
 
 	double** matrix_values = new double* [ROWS];
-	
+
 	for (int i = 0; i < ROWS; i++) {
 		matrix_values[i] = new double[COLUMNS];
 	}
 
+	double number;
 	for (int i = 0; i < ROWS; i++) {
-		streamoff line_length = file.tellg() * 2;
-		char* line_content = new char[(unsigned int)line_length];
-		file.getline(line_content, line_length);
-		int column = 0;
-		int CYCLE_ITERATIONS = line_length / 2;
+		for (int j = 0; j < COLUMNS; j++) {
+			file >> number;
 
-		for (int j = 0; i < CYCLE_ITERATIONS; j++) {
-			char* number_as_string = new char[MAX_NUMBER_LENGTH];
-			char symbol = line_content[j];
-
-			int number_length = 0;
-			while (symbol != (char)32) {
-				if ((symbol >= '0' && symbol <= '9')
-					|| symbol == '.') {
-
-					number_as_string[number_length++] = symbol;
-					symbol = line_content[++j];
-				}
-				else if (symbol == '\0') {
-					break;
-				}
-				else {
-					break;
-				}
-			}
-
-			if (number_length != 0) {
-				number_as_string[number_length] = '\0';
-				double number = stof(number_as_string);
-				matrix_values[i][column] = number;
-				column++;
-			}
-
-			delete[] number_as_string;
-			number_as_string = NULL;
-
-			if (j > CYCLE_ITERATIONS) {
-				break;
-			}
+			matrix_values[i][j] = number;
 		}
-
-		delete[] line_content;
-		line_content = NULL;
 	}
 
 	return matrix_values;
@@ -202,7 +159,7 @@ double** get_matrix_values(std::ifstream& file,
 /// </summary>
 /// <param name="file">file stream to read</param>
 /// <returns>matrix with values and dimensions set</returns>
-MatrixRepresentation get_matrix(const char * filename) {
+MatrixRepresentation get_matrix(const char* filename) {
 	ifstream file;
 	file.open(filename);
 	MatrixRepresentation matrix;
@@ -216,7 +173,7 @@ MatrixRepresentation get_matrix(const char * filename) {
 		matrix.set_values(values);
 
 		file.close();
-		
+
 		for (int i = 0; i < dimensions.get_rows(); i++) {
 			delete[] values[i];
 		}
@@ -233,10 +190,10 @@ MatrixRepresentation get_matrix(const char * filename) {
 /// </summary>
 /// <param name="filename">File to get scalar from</param>
 /// <returns>scalar</returns>
-double get_scalar(const char * filename) {
+double get_scalar(const char* filename) {
 	ifstream file(filename);
 	double scalar = 0;
-	
+
 	if (file.is_open()) {
 		const int MAX_SCALAR_LENGTH = 320;
 		char* scalar_as_string = new char[MAX_SCALAR_LENGTH];
@@ -257,7 +214,7 @@ double get_scalar(const char * filename) {
 				file.seekg(-2, ios_base::cur);
 			}
 		}
-		
+
 		file.getline(scalar_as_string, MAX_SCALAR_LENGTH);
 		scalar = stof(scalar_as_string);
 
@@ -284,16 +241,16 @@ int get_element_length(double number) {
 	double decimal_part = number - whole_part;
 	int length = 0;
 
-	while (whole_part > 0) {
+	if (number < 0) {
+		length++;
+	}
+
+	while (whole_part != 0) {
 		length++;
 		whole_part /= 10;
 	}
 
 	if (decimal_part != 0) {
-		length++;
-	}
-
-	if (number < 0) {
 		length++;
 	}
 
@@ -313,72 +270,33 @@ int get_element_length(double number) {
 	return length;
 }
 
-/// <summary>
-/// Get length of every matrix element
-/// </summary>
-/// <param name="matrix">input matrix</param>
-/// <returns>matrix elements lengths with elements count</returns>
-MatrixElementsLength get_matrix_elements_lengths(
-	MatrixRepresentation matrix) {
-
-	const int ROWS = matrix.get_dimensions().get_rows();
-	const int COLUMNS = matrix.get_dimensions().get_columns();
-
-	MatrixElementsLength elements_lengths;
-	if (matrix.get_values() != NULL) {
-		const int ELEMENTS_COUNT = ROWS * COLUMNS;
-		elements_lengths.set_elements_count(ELEMENTS_COUNT);
-		elements_lengths.init_elements_lengths();
-		int* elements_length = new int[ELEMENTS_COUNT];
-
-		int count = 0;
-		for (int i = 0; i < COLUMNS; i++) {
-			for (int j = 0; j < ROWS; j++) {
-				elements_length[count++] =
-					get_element_length(matrix.get_values()[j][i]);
-			}
-		}
-		elements_lengths.set_elements_lengths(elements_length);
-
-		delete[] elements_length;
-		elements_length = NULL;
-	}
-	else {
-		return elements_lengths;
-	}
-
-	return elements_lengths;
-}
-
-/// <summary>
-/// 
-/// </summary>
-/// <param name="matrix_elements_lengths"></param>
-/// <param name="columns"></param>
-/// <returns></returns>
 LongestElementsLengths get_columns_longest_elements(
-	MatrixElementsLength matrix_elements_lengths,
-	int columns) {
+	MatrixRepresentation matrix, int columns) {
 
 	LongestElementsLengths elements_lengths;
-	if (matrix_elements_lengths
-		.get_elements_lengths() != NULL) {
-		
+
+	if (matrix.get_values() != NULL) {
 		int* longest_elements_lengths = new int[columns];
 		elements_lengths.set_elements_count(columns);
 		elements_lengths.init_elements_lengths();
 
+		int index = 0;
+		const int ROWS = matrix.get_dimensions().get_rows();
+
 		for (int i = 0; i < columns; i++) {
-			int* column_begin = matrix_elements_lengths
-				.get_elements_lengths() + i * columns;
+			int longest_number = INT_MIN;
 
-			int* column_end = matrix_elements_lengths
-				.get_elements_lengths() + ((i + 1) * columns);
+			for (int j = 0; j < ROWS; j++) {
+				double number = matrix.get_values()[j][i];
 
-			int longest_number = *max_element(
-				column_begin, column_end);
+				int number_length = get_element_length(number);
 
-			longest_elements_lengths[i] = longest_number;
+				if (longest_number < number_length) {
+					longest_number = number_length;
+				}
+			}
+
+			longest_elements_lengths[index++] = longest_number;
 		}
 
 		elements_lengths.set_elements_lengths(
