@@ -90,7 +90,6 @@ void print_matrices_operations(
 	MatrixRepresentation result_matrix,
 	char operation_symbol) {
 
-	const char* EMPTY_STRING = "    ";
 	const int ROWS_RESULT_MATRIX =
 		result_matrix.get_dimensions().get_rows();
 
@@ -113,7 +112,7 @@ void print_matrices_operations(
 			cout << "A " << operation_symbol << " B = ";
 		}
 		else {
-			for (int i = 0; i < 8; i++) {
+			for (int k = 0; k < 8; k++) {
 				cout << " ";
 			}
 		}
