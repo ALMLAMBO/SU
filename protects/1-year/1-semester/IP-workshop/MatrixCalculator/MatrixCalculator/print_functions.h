@@ -32,15 +32,16 @@ void print_matrix_mult_divide_number(
 	bool multiply,
 	double scalar);
 
+void print_matrix_inverse_transpose(
+	MatrixRepresentation input_matrix,
+	MatrixRepresentation result_matrix,
+	const char* message,
+	bool transpose);
+
 void print_matrix_det(MatrixRepresentation matrix,
 	double determinant, bool determinant_exists);
 
-void print_matrix_inverse(
-	MatrixRepresentation input_matrix,
-	MatrixRepresentation inverse_matrix);
-
-void print_matrix_transpose(
-	MatrixRepresentation matrix,
-	MatrixRepresentation result_matrix);
+void print_matrix(char matrix_letter,
+	MatrixRepresentation matrix);
 
 #endif // !__PRINT_FUNCTIONS__
