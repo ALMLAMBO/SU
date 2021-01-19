@@ -63,7 +63,7 @@ void matrix_operations_manager(int option) {
 		MatrixRepresentation matrix_to_find_det =
 			get_matrix(MATRIX_DETERMINANT_FILENAME);
 
-		double determinant = calculate_matrix_determinant(
+		calculate_matrix_determinant(
 			matrix_to_find_det);
 
 		matrix_to_find_det.destroy_matrix_values();
@@ -74,8 +74,6 @@ void matrix_operations_manager(int option) {
 	case 4: {
 		MatrixRepresentation matrix_div_number =
 			get_matrix(MATRIX_DIVISION_NUMBER);
-
-		double scalar = get_scalar(MATRIX_DIVISION_NUMBER);
 
 		MatrixRepresentation result_matrix_div_number =
 			matrix_mult_divide_with_number(MATRIX_DIVISION_NUMBER, false);
@@ -413,8 +411,8 @@ MatrixRepresentation find_matrix_inverse(
 						plus_sign = false;
 					}
 
-					double a = (int)(sub_det * 1000000 + 0.5);
-					double rounded_sub_det = a / 1000000;
+					double temp_sub_det = (int)(sub_det * 1000000 + 0.5);
+					sub_det = temp_sub_det / 1000000;
 
 					matrix_values[j][i] = (float)sub_det;
 
