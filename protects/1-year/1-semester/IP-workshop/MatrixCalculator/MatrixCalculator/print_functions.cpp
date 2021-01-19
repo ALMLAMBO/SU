@@ -214,20 +214,22 @@ void print_matrix_mult_divide_number(
 			cout << EMPTY_STRING;
 		}
 
-		cout << BEGIN_END_ROW_SYMBOL;
-		for (int j = 0; j < COLUMNS_INPUT_MATRIX; j++) {
-			int column_longest_number =
-				result_matrix_longest_elements_lengths
-				.get_elements_lengths()[j];
+		if (result_matrix.get_values() != NULL) {
+			cout << BEGIN_END_ROW_SYMBOL;
+			for (int j = 0; j < COLUMNS_INPUT_MATRIX; j++) {
+				int column_longest_number =
+					result_matrix_longest_elements_lengths
+					.get_elements_lengths()[j];
 
-			cout << setw(column_longest_number)
-				<< result_matrix.get_values()[i][j];
+				cout << setw(column_longest_number)
+					<< result_matrix.get_values()[i][j];
 
-			if (j != COLUMNS_INPUT_MATRIX - 1) {
-				cout << " ";
+				if (j != COLUMNS_INPUT_MATRIX - 1) {
+					cout << " ";
+				}
 			}
+			cout << BEGIN_END_ROW_SYMBOL << endl;
 		}
-		cout << BEGIN_END_ROW_SYMBOL << endl;
 	}
 
 	input_matrix_longest_elements_lengths
