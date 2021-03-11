@@ -24,24 +24,28 @@ Login::Login(const char* username,
 	this->session = session;
 }
 
-Login::Login(const Login& other) {
+Login::Login(const Login& other) : 
+	Login(other.username, other.password, other.session) { }
 
+void Login::set_username(const char* new_username) {
+	delete[] this->username;
+	this->copy_char_array(this->username, new_username);
 }
 
-void Login::set_username(const char*) {
-
+void Login::set_password(const char* new_password) {
+	delete[] this->password;
+	this->copy_char_array(this->password, new_password);
 }
 
-void Login::set_password(const char*) {
-
-}
-
-void Login::set_session(const int) {
-
+void Login::set_session(const int new_session) {
+	this->session = new_session;
 }
 
 void Login::print() const {
-
+	std::cout << this->username 
+		<< " " << this->password 
+		<< " " << this->session 
+		<< std::endl;
 }
 
 char* Login::get_username() const {
@@ -57,5 +61,8 @@ int Login::get_session() const {
 }
 
 void Login::copy_char_array(char* destination, const char* source) {
-
+	int len = strlen(source);
+	destination = new char[len + 1];
+	strcpy(destination, source);
+	destination[len] = '\0';
 }

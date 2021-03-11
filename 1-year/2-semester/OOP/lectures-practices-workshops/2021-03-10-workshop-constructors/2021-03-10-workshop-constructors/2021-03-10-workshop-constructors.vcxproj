@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0f80d833-3923-47e3-8325-61b0d16ad9e1}</ProjectGuid>
-    <RootNamespace>My2YuGiOhTournament</RootNamespace>
+    <ProjectGuid>{8e8ee67d-4542-4bf5-81e4-f294533656d1}</ProjectGuid>
+    <RootNamespace>My20210310workshopconstructors</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\2021-03-10-constructors\2021-03-10-constructors\Login.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\2021-03-10-constructors\2021-03-10-constructors\Login.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

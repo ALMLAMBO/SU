@@ -1,5 +1,9 @@
 #pragma once
 #ifndef __LOGIN_HPP__
+#define __LOGIN_HPP__
+
+#include <cstring>
+#include <iostream>
 
 class Login {
 public:
