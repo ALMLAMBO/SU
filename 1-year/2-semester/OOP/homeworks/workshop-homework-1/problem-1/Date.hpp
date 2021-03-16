@@ -4,7 +4,8 @@
 
 class Date {
 public:
-	Date(int day, int month, int year);
+	Date();
+	Date(unsigned int day, unsigned int month, unsigned int year);
 
 	Date add_days(const int& days);
 	Date remove_days(const int& days);
@@ -15,7 +16,7 @@ public:
 	bool is_later_than(const Date& other) const;
 
 private:
-	int day_, month_, year_;
+	unsigned int day_, month_, year_;
 };
 
 #endif // !__DATE_HPP__
