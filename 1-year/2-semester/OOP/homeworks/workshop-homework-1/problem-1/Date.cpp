@@ -1,7 +1,10 @@
 #include "Date.hpp"
 
-Date::Date(const int day = 1,
-	const int month = 1, const int year = 2000) {
+Date::Date() : day_(1), 
+	month_(1), year_(2000) { }
+
+Date::Date(const unsigned int day,
+	const unsigned int month, const unsigned int year) {
 
 	this->day_ = day;
 	this->month_ = month;
@@ -17,6 +20,16 @@ Date Date::remove_days(const int& days) {
 }
 
 bool Date::is_leap_year() const {
+	if (this->year_ % 400 == 0) {
+		return true;
+	}
+	else if (this->year_ % 100 == 0) {
+		return false;
+	}
+	else if (this->year_ % 4 == 0) {
+		return true;
+	}
+
 	return false;
 }
 
