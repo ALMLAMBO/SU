@@ -7,7 +7,7 @@
 class MonsterCard {
 public:
 	MonsterCard();
-	MonsterCard(const char*& name,
+	MonsterCard(const char* name,
 		const unsigned int& attact_points,
 		const unsigned int& defense_points);
 

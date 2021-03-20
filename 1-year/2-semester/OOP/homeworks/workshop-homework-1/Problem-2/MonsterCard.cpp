@@ -6,7 +6,7 @@ MonsterCard::MonsterCard() :
 	this->name = new char[1]{ '\0' };
 }
 
-MonsterCard::MonsterCard(const char*& name,
+MonsterCard::MonsterCard(const char* name,
 	const unsigned int& attack_points,
 	const unsigned int& defense_points) {
 
