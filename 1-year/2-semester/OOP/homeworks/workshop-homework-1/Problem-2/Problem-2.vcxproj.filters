@@ -35,7 +35,7 @@
     <ClInclude Include="HelperFunctions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpellCard.hpp">
+    <ClInclude Include="MagicCard.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
