@@ -2,6 +2,8 @@
 #ifndef __MAGIC_CARD_HPP__
 #define __MAGIC_CARD_HPP__
 
+#include "HelperFunctions.hpp"
+
 enum MagicCardType {
 	trap,
 	buff,
