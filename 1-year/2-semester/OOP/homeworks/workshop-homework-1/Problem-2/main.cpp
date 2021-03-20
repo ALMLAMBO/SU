@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MonsterCard.hpp"
 #include "MagicCard.hpp"
+#include "Deck.hpp"
 
 using namespace std;
 
@@ -26,6 +27,22 @@ int main() {
 
 	m1.set_effect("dfoi;asjlkfrtoiew;lkfsdogihajkd;gasdoifhlskdfglgkhlasfasdiufoda;aewhriow;flkashfsda;fhdfasdoifk;dsfislk;v,chdsfasjk;fl");
 	cout << m1.get_effect() << endl;
+
+	Deck d;
+	for (int i = 0; i < 20; i++) {
+		d.add_magic_card(m1);
+		d.add_monster_card(c1);
+	}
+
+	cout << d.get_magic_cards_count() << endl;
+	cout << d.get_monster_cards_count() << endl;
+
+	d.add_magic_card(m1);
+	d.add_monster_card(c1);
+
+	Deck d2;
+	d2.change_magic_card(5, "AAA", "AAA", MagicCardType::trap);
+	cout << d2.get_magic_cards_count() << endl;
 
 	return 0;
 }
