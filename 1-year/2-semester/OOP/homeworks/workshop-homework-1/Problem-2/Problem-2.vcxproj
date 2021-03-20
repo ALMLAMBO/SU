@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HelperFunctions.cpp" />
+    <ClCompile Include="MagicCard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MonsterCard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HelperFunctions.hpp" />
     <ClInclude Include="MonsterCard.hpp" />
+    <ClInclude Include="SpellCard.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
