@@ -42,6 +42,9 @@ void Deck::change_monster_card(int index, const char* new_name,
 		MonsterCard new_card(new_name, 
 			new_attack_points, new_deffense_points);
 
+		if (this->empty_monster_card(this->monster_cards[index])) {
+			this->monster_cards_count++;
+		}
 		this->monster_cards[index] = new_card;
 	}
 	else {
@@ -56,6 +59,9 @@ void Deck::change_magic_card(int index, const char* new_name,
 		MagicCard new_card(new_name,
 			new_effect, new_type);
 
+		if (this->empty_magic_card(this->magic_cards[index])) {
+			this->magic_cards_count++;
+		}
 		this->magic_cards[index] = new_card;
 	}
 	else {
