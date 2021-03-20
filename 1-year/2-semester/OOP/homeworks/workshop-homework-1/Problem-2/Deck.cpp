@@ -14,7 +14,7 @@ int Deck::get_monster_cards_count() const {
 void Deck::add_monster_card(const MonsterCard& new_card) {
 	int index = this->first_free_monster_card();
 	
-	if (index > 0) {
+	if (index >= 0) {
 		this->monster_cards[index] = new_card;
 		this->monster_cards_count++;
 	}
@@ -26,7 +26,7 @@ void Deck::add_monster_card(const MonsterCard& new_card) {
 void Deck::add_magic_card(const MagicCard& new_card) {
 	int index = this->first_free_magic_card();
 	
-	if (index > 0) {
+	if (index >= 0) {
 		this->magic_cards[index] = new_card;
 		this->magic_cards_count++;
 	}
