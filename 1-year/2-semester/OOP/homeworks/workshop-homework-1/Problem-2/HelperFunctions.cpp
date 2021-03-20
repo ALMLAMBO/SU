@@ -10,7 +10,7 @@ char* HelperFunctions::copy_char_array(
 	}
 
 	char* destination = new char[len + 1];
-	strcpy_s(destination, len, source);
+	strcpy(destination, source);
 
 	return destination;
 }

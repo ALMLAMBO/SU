@@ -1,6 +1,7 @@
 #pragma once
 #ifndef __HELPER_FUNCTIONS_HPP__
 #define __HELPER_FUNCTIONS_HPP__
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <cstring>
 
