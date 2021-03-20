@@ -139,12 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="Duelist.cpp" />
     <ClCompile Include="HelperFunctions.cpp" />
     <ClCompile Include="MagicCard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MonsterCard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Deck.hpp" />
+    <ClInclude Include="Duelist.hpp" />
     <ClInclude Include="HelperFunctions.hpp" />
     <ClInclude Include="MonsterCard.hpp" />
     <ClInclude Include="MagicCard.hpp" />
