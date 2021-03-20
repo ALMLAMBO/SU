@@ -6,7 +6,7 @@ char* HelperFunctions::copy_char_array(
 	int len = strlen(source);
 	
 	if (len > max_length) {
-		return NULL;
+		return new char[1]{ '\0' };
 	}
 
 	char* destination = new char[len + 1];
