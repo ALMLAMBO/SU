@@ -2,6 +2,7 @@
 #include "MonsterCard.hpp"
 #include "MagicCard.hpp"
 #include "Deck.hpp"
+#include "Duelist.hpp"
 
 using namespace std;
 
@@ -43,6 +44,11 @@ int main() {
 	Deck d2;
 	d2.change_magic_card(5, "AAA", "AAA", MagicCardType::trap);
 	cout << d2.get_magic_cards_count() << endl;
+
+	Duelist player1("Yugi Muto");
+	player1.change_monster_card_in_deck(2, c1);
+	player1.change_magic_card_in_deck(0, m1);
+
 
 	return 0;
 }
