@@ -3,6 +3,7 @@
 #define __DUELIST_HPP__
 
 #include "Deck.hpp"
+#include "HelperFunctions.hpp"
 
 class Duelist {
 public:
