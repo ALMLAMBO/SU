@@ -32,15 +32,15 @@ MonsterCard& MonsterCard::operator=(const MonsterCard& other) {
 	return *this;
 }
 
-void MonsterCard::set_name(const char*& new_name) {
+void MonsterCard::set_name(const char* new_name) {
 	this->name = HelperFunctions::copy_char_array(new_name, 25);
 }
 
-void MonsterCard::set_attack_points(const int& new_attack_points) {
+void MonsterCard::set_attack_points(const unsigned int& new_attack_points) {
 	this->attack_points = new_attack_points;
 }
 
-void MonsterCard::set_defense_points(const int& new_defense_points) {
+void MonsterCard::set_defense_points(const unsigned int& new_defense_points) {
 	this->defense_points = new_defense_points;
 }
 

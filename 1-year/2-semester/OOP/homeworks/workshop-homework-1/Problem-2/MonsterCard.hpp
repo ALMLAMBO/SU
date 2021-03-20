@@ -15,9 +15,9 @@ public:
 	~MonsterCard();
 	MonsterCard& operator=(const MonsterCard& other);
 
-	void set_name(const char*& new_name);
-	void set_attack_points(const int& new_attack_points);
-	void set_defense_points(const int& new_defense_points);
+	void set_name(const char* new_name);
+	void set_attack_points(const unsigned int& new_attack_points);
+	void set_defense_points(const unsigned int& new_defense_points);
 
 	char* get_name() const;
 	unsigned int get_attack_points() const;
