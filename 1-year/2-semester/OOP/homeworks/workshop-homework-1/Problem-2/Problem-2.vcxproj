@@ -139,9 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HelperFunctions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MonsterCard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HelperFunctions.hpp" />
     <ClInclude Include="MonsterCard.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
