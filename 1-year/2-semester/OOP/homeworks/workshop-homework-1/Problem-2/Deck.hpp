@@ -1,3 +1,14 @@
+/**
+* Solution to homework assignment 1
+* Object Oriented Programming Course
+* Faculty of Mathematics and Informatics of Sofia University
+* Summer semester 2020/2021
+*
+* @author Alexander Marinov
+* @idnumber 62622
+* @task 2
+* @compiler VC
+*/
 #pragma once
 #ifndef __DECK_HPP__
 #define __DECK_HPP__
