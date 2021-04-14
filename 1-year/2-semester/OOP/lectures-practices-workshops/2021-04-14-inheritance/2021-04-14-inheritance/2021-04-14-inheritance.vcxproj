@@ -139,7 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="2021-04-14-inheritance.cpp" />
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Motorcycle.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Car.hpp" />
+    <ClInclude Include="Motorcycle.hpp" />
+    <ClInclude Include="Vehicle.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
