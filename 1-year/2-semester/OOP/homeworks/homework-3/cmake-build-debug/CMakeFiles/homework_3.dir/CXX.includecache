@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/Developer.cpp
+Developer.hpp
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/Developer.hpp
+TeamLead.hpp
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/TeamLead.hpp
+
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/Developer.hpp
+string
+-
+
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/LeavingRequest.hpp
+Request.hpp
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/Request.hpp
+
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/PromotionRequest.hpp
+Request.hpp
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/Request.hpp
+
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/Request.hpp
+string
+-
+
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/TeamLead.hpp
+vector
+-
+algorithm
+-
+Developer.hpp
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/Developer.hpp
+LeavingRequest.hpp
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/LeavingRequest.hpp
+PromotionRequest.hpp
+E:/Users/ALEKS/Programming-SU/1-year/2-semester/OOP/homeworks/homework-3/2/PromotionRequest.hpp
+
